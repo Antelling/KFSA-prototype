@@ -1,0 +1,59 @@
+{
+  "Required Courses": {
+    "type": "reqlist",
+    "description": "",
+    "courses": [
+      ["CSC 125: Discrete Math for CS II (test thing)", 3],
+      ["CSC 225: Discrete Math for CS I", 3],
+      ["CSC 135: Comp Sci I", 3],
+      ["CSC 136: Comp Sci II", 3],
+      ["CSC 150: Ethical, Legal, and Professional Impacts of the Digital Age", 3],
+      ["CSC 235: Comp Org & Assembly Language", 3],
+      ["CSC 237: Data Structures", 3],
+      ["CSC 310: Prog. Languages", 3],
+      ["CSC 328: Network Programming", 3],
+      ["CSC 343: Operating Systems", 3],
+      ["CSC 354: Software Engineering I", 3],
+      ["CSC 355: Software Engineering II", 3]
+    ]
+  },
+  "Elective Courses": {
+    "type": "creditdemand",
+    "description": "0-9 credits of additional 200 level CSC courses, not previously used for above requirements, excluding CSC 280",
+    "credits": [0, 9],
+    "credit prefill": 3,
+    "slots": 3
+  },
+  "Concomitant Courses": {
+    "type": "reqlist",
+    "description": "",
+    "courses": [
+      ["MAT 260: Linear Algebra", 3],
+      ["Natural Science Course for a Science Major (Students must take two science courses intended for a science major. At least once of these courses must include a lab.)", -1]
+    ]
+  },
+  "Directed General Education": {
+    "type": "reqlist",
+    "description": "The following courses are required to fulfill the computer science requirements and are suffested to satisfy general education.",
+    "courses": [
+      ["PHI 40: Intro to Ethics (B)", 3],
+      ["MAT 181: Calculus (C. 2)", 4],
+      ["MAT 140 OR (Students minoring in math should take MAT 301) MAT 301: Applied Stat Methods (C. 3)", 3],
+      ["Natural Science Course for a Science Major (C. 1)", -1]
+    ]
+  },
+  "Free Electives": {
+    "type": "creditdemand",
+    "description": "any course carrying university credit",
+    "slots": 6,
+    "credit prefill": -1,
+    "credits": [15, 18]
+  },
+  "Additional Elective Courses": {
+    "type": "creditdemand",
+    "description": "9-18 credits of additional CSC courses, number 300 or above and not previously used for above requirements, excluding any course numbered CSC 87X and CSC 380.",
+    "slots": 6,
+    "credit prefill": 3,
+    "credits": [9, 18]
+  }
+}
