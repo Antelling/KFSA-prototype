@@ -34,11 +34,15 @@ h2 {
 
 table {
     width: 30vw;
+    border-collapse: collapse;
 }
 td {
     text-align: left;
-    border-top: 1px solid black;
+    /*border-top: 1px solid black;*/
     padding: 10px;
+}
+tr {
+    border-top: 1px solid black;
 }
 
 input[type=number] {
@@ -70,3 +74,12 @@ textarea {
     border: 1px solid black;
 }
 
+select {
+    display: inline;
+}
+
+.tooltip {
+    background-color: #dddddd;
+    padding: 5px;
+    cursor: pointer;
+}

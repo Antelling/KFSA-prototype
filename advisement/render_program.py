@@ -8,8 +8,10 @@ def render(checksheet, program_title):
         elif data["type"] == "creditdemand":
             html += creditdemand(data)
         html += "</table></div>"
-    html = html.replace("(", "<span title=\"")
-    html = html.replace(")", "\">???</span>")
+
+    #collapse parentheses
+    html = html.replace("(", "<span class=tooltip title=\"")
+    html = html.replace(")", "\">*</span>")
     html += "</div>"
     return html
 
@@ -36,10 +38,10 @@ def format_credit(cr):
     else:
         return "<input type='number'/>"
 
-def grade_selector():
+def grade_selector2():
     return """
         <select>
-            <option value=NC selected></option>
+            <option value="" selected></option>
             <option value=A>A</option>
             <option value=B>B</option>
             <option value=C>C</option>
@@ -49,8 +51,31 @@ def grade_selector():
             <option value=PC>PC</option>
             <option value=NC>NC</option>
         </select>
+        <select>
+            <option value="+">+</option>
+            <option value="" selected> </option>
+            <option value="-">-</option>
+        </select>
     """
 
+def grade_selector():
+    return """
+        <select>
+            <option value="" selected></option>
+            <option value=A>A</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B">B</option>
+            <option value="B-">B-</option>
+            <option value="C+">C+</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value=F>F</option>
+            <option value=P>P</option>
+            <option value=I>I</option>
+            <option value=NC>NC</option>
+        </select>
+    """
 def course_selector():
     return """<input type=text placeholder='course number'/><input type=text placeholder='course name'/>"""
 
