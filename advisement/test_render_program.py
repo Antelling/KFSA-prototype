@@ -4,10 +4,10 @@ try:
 except ImportError:
     from . import render_program
 
-program_files = os.listdir(os.path.join(os.getcwd(), "programs"))
+program_files = os.listdir(os.path.join(os.getcwd(), "checksheet_templates"))
 programs = []
 for file in program_files:
-    cs = open(os.path.join(os.getcwd(), "programs", file), "r").read()
+    cs = open(os.path.join(os.getcwd(), "checksheet_templates", file), "r").read()
     html = render_program.render(json.loads(cs), str(file.split(".")[0]).replace("_", " "))
     programs.append(html)
 html = render_program.test_wrapper(",".join(programs))
