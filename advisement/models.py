@@ -11,3 +11,6 @@ class ChecksheetInstance(models.Model):
 class Advisor(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="identity")
     students = models.ManyToManyField(User)
+
+    def __str__(self):
+        return "Advisor< " + self.user.username + " >"

@@ -4,7 +4,16 @@
 
 {% block content %}
 
-    Hi {{ user.username }}! Welcome to the advisment system.
-    <p><a href="../">Back</a></p>
+    <p>Hi {{ user.username }}! Welcome to the advisment system.</p>
 
+    <div class="button"><a href="./add_advisee/">Edit your students. </a></div>
+
+    <h1>Your students</h1>
+    {% for student in students %}
+        <div class="students">
+            <div class="student">
+                <h6>{{ student }}</h6>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}
