@@ -1,0 +1,7 @@
+<h1>Select a major for this student: </h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit"/>
+</form>

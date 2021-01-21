@@ -1,7 +1,11 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Advisor
-@admin.register(Advisor)
+from . import models
+@admin.register(models.Advisor)
 class AdvisorAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(models.Student)
+class StudentAdmin(admin.ModelAdmin):
     pass

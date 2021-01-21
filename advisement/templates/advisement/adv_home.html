@@ -12,7 +12,7 @@
     {% for student in students %}
         <div class="students">
             <div class="student">
-                <h6>{{ student }}</h6>
+                <h6>{{ student }} - <a href="{% url 'overview' student.pk %}">Overview</a></h6>
             </div>
         </div>
     {% endfor %}
