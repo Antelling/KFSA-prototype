@@ -17,7 +17,7 @@
             {% endif %}
         </form>
     </div>
-    <div id=notes><textarea>Record advisement notes here</textarea></div>
+    <div id=notes><textarea name="notes">{{ advisement.notes }}</textarea></div>
 
     <a href="{% url "overview" advisement.student.user.pk %}">Exit advising session</a>
 
@@ -43,9 +43,11 @@
 
             function save_form() {
                 let serialization = getFormData($('form'));
+                let notes = $('textarea').val();
                 console.log("saving: ", serialization);
                 data = {
                     'serialization': serialization,
+                    'notes': notes,
                     'csrfmiddlewaretoken': '{{ csrf_token }}'
                 }
                 $.post(

@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
-
 class Advisor(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="identity")
     students = models.ManyToManyField(User)
@@ -22,3 +20,5 @@ class ChecksheetInstance(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     advisor = models.ForeignKey(Advisor, on_delete=models.CASCADE)
     data = models.TextField()
+    date = models.DateTimeField(auto_now=True)
+    notes = models.TextField()

@@ -103,6 +103,7 @@ def edit_advisement(request, advisement):
     advisement = ChecksheetInstance.objects.get(pk=advisement)
     if request.method == "POST":
         advisement.data = request.POST.get("serialization")
+        advisement.notes = request.POST.get("notes")
         advisement.save()
         return HttpResponse("save successful")
     else:
