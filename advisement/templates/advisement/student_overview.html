@@ -1,6 +1,10 @@
+<h2>Advisement Records for {{ student.user.username }}: </h2>
 
+{% for advisement in advisements %}
+    <div>
+        Advisor: {{ advisement.advisor.user.username }} | <a href="{% url "edit_advisement" advisement.pk %}">Edit</a>
+    </div>
+{% endfor %}
 
-<h1>{{ student.username }}</h1>
-<h2>Advisement Records: </h2>
-
+<br/>
 <a href={% url 'add_advisement' student.user.pk %}>Add Advisement</a>

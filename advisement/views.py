@@ -49,11 +49,15 @@ def home(request):
 
 def student_overview(request, student):
     user = User.objects.get(pk=student)
+
+    #get or create student record
     try:
         student = Student.objects.get(user=user)
     except ObjectDoesNotExist:
         return HttpResponseRedirect(f"../../add_major/{user.pk}") #FIXME: replace relative redirect with named reference
-    return render(request, "advisement/student_overview.html", {"student": student})
+
+    advisement_sessions = ChecksheetInstance.objects.filter(student=student)
+    return render(request, "advisement/student_overview.html", {"student": student, "advisements": advisement_sessions})
 
 def add_major(request, student):
     student_user = User.objects.get(pk=student)
