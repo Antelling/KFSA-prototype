@@ -9,7 +9,8 @@ urlpatterns = [
     path('student_overview/<int:student>/', views.student_overview, name="overview"),
     path('add_major/<int:student>/', views.add_major, name="add_major"),
     path('add_advisement/<int:student>/', views.add_advisement, name="add_advisement"),
-    path('edit_advisement/<int:advisement>', views.edit_advisement, name="edit_advisement")
+    path('edit_advisement/<int:advisement>', views.edit_advisement, name="edit_advisement"),
+    path('view_advisement/<int:advisement>', views.view_advisement, name="view_advisement")
 ]
 
 

@@ -102,4 +102,12 @@ def edit_advisement(request, advisement):
                                     advisement.template_filename), "r").read()
         html = render_program.render(json.loads(program),
                                      str(advisement.template_filename.split(".")[0]).replace("_", " "))
-        return render(request, "advisement/advisement.html", {'html': html, 'advisement': advisement})
+        return render(request, "advisement/advisement.html", {'html': html, 'advisement': advisement, "editable": True})
+
+def view_advisement(request, advisement):
+    advisement = ChecksheetInstance.objects.get(pk=advisement)
+    program = open(os.path.join(os.getcwd(), "advisement/checksheet_templates",
+                                advisement.template_filename), "r").read()
+    html = render_program.render(json.loads(program),
+                                 str(advisement.template_filename.split(".")[0]).replace("_", " "))
+    return render(request, "advisement/advisement.html", {'html': html, 'advisement': advisement, "editable": False})
