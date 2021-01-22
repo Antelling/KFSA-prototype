@@ -59,6 +59,7 @@ def student_overview(request, student):
     advisement_sessions = ChecksheetInstance.objects.filter(student=student)
     return render(request, "advisement/student_overview.html", {"student": student, "advisements": advisement_sessions})
 
+
 def add_major(request, student):
     student_user = User.objects.get(pk=student)
     if request.method == "POST":
@@ -74,15 +75,23 @@ def add_major(request, student):
         form = StudentChecksheetSelect()
         return render(request, "advisement/add_major.html", {"form": form})
 
+
 def add_advisement(request, student):
     #gather the student and advisor objects
     student_user = User.objects.get(pk=student)
     student = Student.objects.get(user=student_user)
     advisor = Advisor.objects.get(user=request.user)
 
+    #check if there is already an advisement record for this user
+    try:
+        prev_adv = ChecksheetInstance.objects.filter(student=student).order_by("-pk")[0]
+        data = prev_adv.data
+    except IndexError:
+        data = ""
+
     #create a new advisement record
     new_advisement = ChecksheetInstance(template_filename=student.template_filename, student=student, advisor=advisor,
-                                        data="")
+                                        data=data)
     new_advisement.save()
 
     #redirect to the edit view so reloading this page does not create duplicate records
@@ -103,6 +112,7 @@ def edit_advisement(request, advisement):
         html = render_program.render(json.loads(program),
                                      str(advisement.template_filename.split(".")[0]).replace("_", " "))
         return render(request, "advisement/advisement.html", {'html': html, 'advisement': advisement, "editable": True})
+
 
 def view_advisement(request, advisement):
     advisement = ChecksheetInstance.objects.get(pk=advisement)

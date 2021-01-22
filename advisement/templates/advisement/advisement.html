@@ -19,6 +19,8 @@
     </div>
     <div id=notes><textarea>Record advisement notes here</textarea></div>
 
+    <a href="{% url "overview" advisement.student.user.pk %}">Exit advising session</a>
+
     <script>
         {% if editable %}
 
