@@ -1,0 +1,60 @@
+{% load static %}
+
+<!doctype html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'libraries/jquery.deserialize.js' %}"></script>
+    <title>Checksheet</title>
+    <link href="{% static 'advisement/checksheet.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div id=wrapper><form> {{ html |safe }} <input type="submit" action="/update_advisment/{{ advisement.pk }}"
+                                                   value="save"> </form></div>
+    <div id=notes><textarea>Record advisement notes here</textarea></div>
+
+    <script>
+        $( "form" ).on( "submit", function( event ) {
+            event.preventDefault();
+            save_form();
+        });
+
+        {#window.setInterval(save_form, 5000);#}
+
+        //https://stackoverflow.com/questions/11338774/serialize-form-data-to-json
+        function getFormData($form) {
+            var unindexed_array = $form.serializeArray();
+            var indexed_array = {};
+            $.map(unindexed_array, function (n, i) {
+                indexed_array[n['name']] = n['value'];
+            });
+            return JSON.stringify(indexed_array);
+        }
+
+        function save_form() {
+            let serialization = getFormData($('form'));
+            console.log("saving: ", serialization);
+            data = {
+                'serialization': serialization,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            }
+            $.post(
+                window.location, data, function (response) {
+                    console.log(response);
+                }
+            );
+        }
+
+        //called once at page load, populates checksheet from database information
+        function load_form() {
+           let raw_data ='{{ advisement.data |safe }}'; //FIXME: replace |safe with |json_script so that the data can
+                                                        //contain single quote characters
+           let serialized_data =  JSON.parse(raw_data);
+           $('form').deserialize(serialized_data);
+        }
+
+        //called once, after everything else has loaded and ran
+        load_form();
+    </script>
+</body>
+</html>

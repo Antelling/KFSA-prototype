@@ -9,3 +9,7 @@ class AdvisorAdmin(admin.ModelAdmin):
 @admin.register(models.Student)
 class StudentAdmin(admin.ModelAdmin):
     pass
+
+@admin.register(models.ChecksheetInstance)
+class ChecksheetInstanceAdmin(admin.ModelAdmin):
+    pass

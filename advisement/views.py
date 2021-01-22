@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Advisor, Student
+from django.urls import reverse
+from .models import Advisor, Student, ChecksheetInstance
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
-from django.urls import reverse
+import os, json
+from . import render_program
 
 from .forms import CreateAdvisorStudentPair, StudentChecksheetSelect
 
@@ -69,6 +71,31 @@ def add_major(request, student):
         return render(request, "advisement/add_major.html", {"form": form})
 
 def add_advisement(request, student):
+    #gather the student and advisor objects
     student_user = User.objects.get(pk=student)
     student = Student.objects.get(user=student_user)
-    return HttpResponse(f"making an advisement record for {student_user.username}. Major is {student.template_filename}")
+    advisor = Advisor.objects.get(user=request.user)
+
+    #create a new advisement record
+    new_advisement = ChecksheetInstance(template_filename=student.template_filename, student=student, advisor=advisor,
+                                        data="")
+    new_advisement.save()
+
+    #redirect to the edit view so reloading this page does not create duplicate records
+    edit_url = reverse(edit_advisement, args=(new_advisement.pk,))
+    return HttpResponseRedirect(edit_url)
+
+
+def edit_advisement(request, advisement):
+    advisement = ChecksheetInstance.objects.get(pk=advisement)
+    if request.method == "POST":
+        advisement.data = request.POST.get("serialization")
+        advisement.save()
+        return HttpResponse("save successful")
+    else:
+        # render a checksheet to html
+        program = open(os.path.join(os.getcwd(), "advisement/checksheet_templates",
+                                    advisement.template_filename), "r").read()
+        html = render_program.render(json.loads(program),
+                                     str(advisement.template_filename.split(".")[0]).replace("_", " "))
+        return render(request, "advisement/advisement.html", {'html': html, 'advisement': advisement})

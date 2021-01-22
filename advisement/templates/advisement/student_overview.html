@@ -1,2 +1,6 @@
+
+
 <h1>{{ student.username }}</h1>
 <h2>Advisement Records: </h2>
+
+<a href={% url 'add_advisement' student.user.pk %}>Add Advisement</a>
