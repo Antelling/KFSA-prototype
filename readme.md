@@ -35,7 +35,8 @@ A selection of tasks that can be completed given the current state of the projec
 - add a CSS framework to base.html (hopefully bootstrap)
 - modify all templates to be pretty with the CSS framework
 - add a favicon 
-- fix any of the FIXME comments in the code 
+- fix any of the FIXME comments in the code \
+- set the django timezone
 - create JSON files for all the programs offered by the CSC department and put them in advisment/checksheet_templates
 
 
@@ -44,6 +45,8 @@ A selection of tasks that can be completed given the current state of the projec
 tasks which are a lot of work and probably need discussion 
 
 - create student records instead of using existing accounts
+
+- integrate with existing kutztown accounts
 
 - create account permissions for
     - editing checksheet templates
