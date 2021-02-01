@@ -29,6 +29,8 @@ which is a great IDE for django with built in debugger and VCS and error highlig
 
 A selection of tasks that can be completed given the current state of the project. 
 
+- password change
+- make view advisement record page have a non-editable textarea 
 - make all the template html files extend base.html
 - add a CSS framework to base.html (hopefully bootstrap)
 - modify all templates to be pretty with the CSS framework

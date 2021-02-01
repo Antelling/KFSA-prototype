@@ -1,0 +1,11 @@
+<h1>All advisees:</h1>
+
+{% for advisee in advisees %}
+    <div class="advisees">
+        <div class="advisee">
+            <h6>{{ advisee.name }} - <a href="{% url 'edit_advisee' advisee.pk %}">edit</a></h6>
+        </div>
+    </div>
+{% endfor %}
+
+<a href="{% url 'adv_home' %}">Home </a>

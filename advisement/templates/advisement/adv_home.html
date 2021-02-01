@@ -6,14 +6,39 @@
 
     <p>Hi {{ user.username }}! Welcome to the advisment system.</p>
 
-    <div class="button"><a href="./add_advisee/">Edit your students. </a></div>
-
-    <h1>Your students</h1>
-    {% for student in students %}
-        <div class="students">
-            <div class="student">
-                <h6>{{ student }} - <a href="{% url 'overview' student.pk %}">Overview</a></h6>
-            </div>
+    {%  if faculty.can_upload_checksheets %}
+        <div>
+        <a href="{% url 'list_checksheets' %}">Manage checksheets</a>
         </div>
-    {% endfor %}
+    {% endif %}
+
+    {%  if faculty.can_add_students %}
+        <div>
+        <a href="{% url 'add_students' %}">Add students</a>
+        </div>
+    {% endif %}
+
+    {%  if faculty.can_assign_students %}
+        <div>
+        <a href="{% url 'advisee_list' %}">Edit Advisee Assignments</a>
+        </div>
+    {% endif %}
+
+
+    {%  if faculty.can_advise %}
+        <h1>Your students</h1>
+
+        {% for student in students %}
+            <div class="students">
+                <div class="student">
+                    <h6>{{ student.name }} - <a href="{% url 'overview' student.pk %}">Overview</a></h6>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div>
+        <a href="{% url 'home' %}">Home</a>
+    </div>
+
 {% endblock %}

@@ -19,7 +19,7 @@
     </div>
     <div id=notes><textarea name="notes">{{ advisement.notes }}</textarea></div>
 
-    <a href="{% url "overview" advisement.student.user.pk %}">Exit advising session</a>
+    <a href="{% url "overview" advisement.advisee.pk %}">Exit advising session</a>
 
     <script>
         {% if editable %}

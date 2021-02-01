@@ -1,0 +1,10 @@
+{% for checksheet in checksheets %}
+    <h5>{{ checksheet.name }} </h5> <!-- TODO: add a view function here, to render an empty checksheet -->
+{% empty %}
+    <p>No checksheets are uploaded.</p>
+{% endfor %}
+
+<a href="{% url 'add_checksheet' %}">Upload Checksheet</a>
+<br/>
+<a href="{% url 'list_checksheets' %}">Back</a>
+<a href="{% url 'adv_home' %}">Home </a>

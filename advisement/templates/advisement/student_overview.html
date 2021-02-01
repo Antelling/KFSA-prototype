@@ -1,6 +1,6 @@
 <a href="{% url "adv_home" %}">Back</a>
 
-<h2>Advisement Records for {{ student.user.username }}: </h2>
+<h2>Advisement Records for {{ advisee.name }}: </h2>
 
 {% for advisement in advisements %}
     <div>
@@ -10,4 +10,4 @@
 {% endfor %}
 
 <br/>
-<a href={% url 'add_advisement' student.user.pk %}>Add Advisement</a>
+<a href={% url 'add_advisement' advisee.pk %}>Add Advisement</a>

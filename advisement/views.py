@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from .models import Advisor, Student, ChecksheetInstance
+from .models import Advisor, Student, ChecksheetInstance, Advisee, ChecksheetTemplate
+from accounts.models import Faculty
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 import os, json
 from . import render_program
-
-from .forms import CreateAdvisorStudentPair, StudentChecksheetSelect
+from .forms import CreateAdvisorStudentPair, StudentChecksheetSelect, AddChecksheet, AddAdvisee
 
 def add_advisee(request):
     if request.method == "POST":
@@ -34,30 +34,18 @@ def add_advisee(request):
 
 def home(request):
     try:
-        advisor = Advisor.objects.get(user=request.user)
-        print(advisor.students.all())
-    except MultipleObjectsReturned:  #TODO: remove these development safeguard cases
-        advisors = Advisor.objects.filter(user=request.user)
-        advisors.delete()
-        return HttpResponse("numerous advisement records returned, deleted them all")
+        faculty = Faculty.objects.get(user=request.user)
     except ObjectDoesNotExist:
-        advisor = Advisor.objects.create(user=request.user)
-        advisor.save()
-        return HttpResponse("created new advisor for this user.")
-    return render(request, 'advisement/adv_home.html', {'students': advisor.students.all()})
+        return HttpResponseRedirect(reverse("set_perm"))
+
+    students = Advisee.objects.filter(advisors__in=[faculty])
+    return render(request, 'advisement/adv_home.html', {'students': students, 'faculty': faculty})
 
 
-def student_overview(request, student):
-    user = User.objects.get(pk=student)
-
-    #get or create student record
-    try:
-        student = Student.objects.get(user=user)
-    except ObjectDoesNotExist:
-        return HttpResponseRedirect(f"../../add_major/{user.pk}") #FIXME: replace relative redirect with named reference
-
-    advisement_sessions = ChecksheetInstance.objects.filter(student=student)
-    return render(request, "advisement/student_overview.html", {"student": student, "advisements": advisement_sessions})
+def advisee_overview(request, advisee):
+    advisee = Advisee.objects.get(pk=advisee)
+    advisement_sessions = ChecksheetInstance.objects.filter(advisee=advisee)
+    return render(request, "advisement/student_overview.html", {"advisee": advisee, "advisements": advisement_sessions})
 
 
 def add_major(request, student):
@@ -76,21 +64,19 @@ def add_major(request, student):
         return render(request, "advisement/add_major.html", {"form": form})
 
 
-def add_advisement(request, student):
-    #gather the student and advisor objects
-    student_user = User.objects.get(pk=student)
-    student = Student.objects.get(user=student_user)
-    advisor = Advisor.objects.get(user=request.user)
+def add_advisement(request, advisee):
+    advisee = Advisee.objects.get(pk=advisee)
+    faculty = Faculty.objects.get(user=request.user)
 
     #check if there is already an advisement record for this user
     try:
-        prev_adv = ChecksheetInstance.objects.filter(student=student).order_by("-pk")[0]
+        prev_adv = ChecksheetInstance.objects.filter(advisee=advisee).order_by("-pk")[0]
         data = prev_adv.data
     except IndexError:
         data = ""
 
     #create a new advisement record
-    new_advisement = ChecksheetInstance(template_filename=student.template_filename, student=student, advisor=advisor,
+    new_advisement = ChecksheetInstance(template=advisee.checksheet, advisee=advisee, advisor=faculty,
                                         data=data)
     new_advisement.save()
 
@@ -108,17 +94,49 @@ def edit_advisement(request, advisement):
         return HttpResponse("save successful")
     else:
         # render a checksheet to html
-        program = open(os.path.join(os.getcwd(), "advisement/checksheet_templates",
-                                    advisement.template_filename), "r").read()
-        html = render_program.render(json.loads(program),
-                                     str(advisement.template_filename.split(".")[0]).replace("_", " "))
+        program = advisement.template.data
+        html = render_program.render(json.loads(program), advisement.template.name)
         return render(request, "advisement/advisement.html", {'html': html, 'advisement': advisement, "editable": True})
 
 
 def view_advisement(request, advisement):
     advisement = ChecksheetInstance.objects.get(pk=advisement)
-    program = open(os.path.join(os.getcwd(), "advisement/checksheet_templates",
-                                advisement.template_filename), "r").read()
-    html = render_program.render(json.loads(program),
-                                 str(advisement.template_filename.split(".")[0]).replace("_", " "))
+    program = advisement.template.data
+    html = render_program.render(json.loads(program), advisement.template.name)
     return render(request, "advisement/advisement.html", {'html': html, 'advisement': advisement, "editable": False})
+
+
+def checksheet_listing(request):
+    checksheets = ChecksheetTemplate.objects.all()
+    return render(request, "advisement/checksheet_listing.html", {"checksheets": checksheets})
+
+def add_checksheet(request):
+    if request.method == "POST":
+        form = AddChecksheet(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse("list_checksheets"))
+    else:
+        form = AddChecksheet()
+        return render(request, "advisement/upload_checksheet.html", {"checksheet": form})
+
+
+def add_students(request):
+    if request.method == "POST":
+        form = AddAdvisee(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse("add_students"))
+    else:
+        form = AddAdvisee()
+        return render(request, "advisement/add_advisee.html", {"form": form})
+
+def advisee_list(request):
+    advisees = Advisee.objects.all()
+    return render(request, "advisement/list_advisees.html", {'advisees': advisees})
+
+def edit_advisee(request, advisee):
+    if request.method == "POST":
+        pass
+    else:
+        return HttpResponse("edit an advisee")

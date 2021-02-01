@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Set Permissions{% endblock %}
+
+{% block content %}
+  <h2>What permissions should you have?</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Set Permissions</button>
+  </form>
+{% endblock %}

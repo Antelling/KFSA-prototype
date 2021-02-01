@@ -1,0 +1,9 @@
+<h1>Checksheet Upload</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ checksheet }}
+    <input type="submit"/>
+</form>
+
+<a href="{% url 'adv_home' %}">Home </a>
