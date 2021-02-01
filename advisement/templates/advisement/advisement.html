@@ -8,7 +8,7 @@
     <title>Checksheet</title>
     <link href="{% static 'advisement/checksheet.css' %}" rel="stylesheet">
 </head>
-<body>
+<body class="csBody">
     <div id=wrapper>
         <form>
             {{ html |safe }}
@@ -17,7 +17,7 @@
             {% endif %}
         </form>
     </div>
-    <div id=notes><textarea name="notes">{{ advisement.notes }}</textarea></div>
+    <div id=notes><textarea class=notes name="notes">{{ advisement.notes }}</textarea></div>
 
     <a href="{% url "overview" advisement.advisee.pk %}">Exit advising session</a>
 
@@ -29,7 +29,7 @@
                 save_form();
             });
 
-            {#window.setInterval(save_form, 5000);#}
+            window.setInterval(save_form, 5000);
 
             //https://stackoverflow.com/questions/11338774/serialize-form-data-to-json
             function getFormData($form) {

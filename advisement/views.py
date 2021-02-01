@@ -114,8 +114,19 @@ def add_checksheet(request):
     if request.method == "POST":
         form = AddChecksheet(request.POST)
         if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse("list_checksheets"))
+            try:
+                html = render_program.render(json.loads(form.cleaned_data["data"]), form.cleaned_data["name"])
+
+                #make sure the name is unique
+                duplicates = ChecksheetTemplate.objects.filter(name=form.cleaned_data["name"]).delete()
+
+                #save the new template
+                form.save()
+
+                #return the rendered HTML for the preview
+                return HttpResponse(html)
+            except Exception as e:
+                return HttpResponse(str(e))
     else:
         form = AddChecksheet()
         return render(request, "advisement/upload_checksheet.html", {"checksheet": form})

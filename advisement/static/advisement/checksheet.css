@@ -1,10 +1,10 @@
-body {
+.csBody {
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
     flex-direction: row;
 }
 
-div {
+#wrapper div {
     padding: 0;
     margin: 30px;
 }
@@ -15,7 +15,7 @@ div {
     text-align: center;
 }
 
-h1, h2 {
+#wrapper h1, #wrapper h2 {
     margin: 0;
     text-align: left;
     background-color: #dddddd;
@@ -23,38 +23,38 @@ h1, h2 {
     max-width: 30vw;
 }
 
-h1 {
+#wrapper h1 {
     font-weight: 800;
 }
 
-h2 {
+#wrapper h2 {
     font-size: 1.1em;
     font-style: italic;
 }
 
-table {
+#wrapper table {
     width: 30vw;
     border-collapse: collapse;
 }
-td {
+ #wrapper td {
     text-align: left;
     /*border-top: 1px solid black;*/
     padding: 10px;
 }
-tr {
+ #wrapper tr {
     border-top: 1px solid black;
 }
 
-input[type=number] {
+ #wrapper input[type=number] {
     width: 40px;
 }
 
-#notes {
+ #wrapper #notes {
     width: 100%;
     border: none;
 }
 
-textarea {
+ .notes {
     width: calc(50% - 40px);
     height: calc(40vh - 40px);
     position: fixed;
@@ -65,20 +65,20 @@ textarea {
     color: black;
 }
 
-.title {
+ #wrapper .title {
     background-color: white;
     font-size: 2.6em;
 }
 
-.program, .req {
+ #wrapper .program, #wrapper .req {
     border: 1px solid black;
 }
 
-select {
+ #wrapper select {
     display: inline;
 }
 
-.tooltip {
+ #wrapper .tooltip {
     background-color: #dddddd;
     padding: 5px;
     cursor: pointer;

@@ -1,9 +1,71 @@
+{% load static %}
+
+<!doctype html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="{% static 'advisement/checksheet.css' %}" rel="stylesheet">
+    <title>Define Checksheet</title>
+    <style>
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container{
+            display: flex;
+            flex-direction: row;
+        }
+        .container * {
+            padding: 10px;
+        }
+        .half{
+            /*TODO: replace this with the mobile friendly bootstrap equivalent*/
+            width: calc(50vw - 12px);
+            margin: 5px;
+            padding: 0;
+            border: 1px solid black;
+        }
+
+        input, textarea{
+            margin-bottom: 20px;
+        }
+
+        input[type=submit] {
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+
 <h1>Checksheet Upload</h1>
 
-<form method="POST">
-    {% csrf_token %}
-    {{ checksheet }}
-    <input type="submit"/>
-</form>
+<div class="container">
 
-<a href="{% url 'adv_home' %}">Home </a>
+    <div class="half">
+        <form method="POST" id="form">
+            {% csrf_token %}
+            {{ checksheet }}
+            <input type="submit" value="save"/>
+        </form>
+    </div>
+
+    <div class="half" id="wrapper">
+        Preview here
+    </div>
+
+</div>
+
+<a href="{% url 'list_checksheets' %}"> Back </a>
+
+<script>
+    $( "form" ).on( "submit", function( event ) {
+        event.preventDefault();
+        data = $("#form").serialize();
+        $.post(
+            window.location, data, function (response) {
+                $("#wrapper").html(response);
+            }
+        );
+    });
+</script>
+</body>
