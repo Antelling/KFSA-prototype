@@ -1,35 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from .models import Advisor, Student, ChecksheetInstance, Advisee, ChecksheetTemplate
+from .models import ChecksheetInstance, Advisee, ChecksheetTemplate
 from accounts.models import Faculty
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 import os, json
 from . import render_program
-from .forms import CreateAdvisorStudentPair, StudentChecksheetSelect, AddChecksheet, AddAdvisee
-
-def add_advisee(request):
-    if request.method == "POST":
-        form = CreateAdvisorStudentPair(request.POST)
-        if form.is_valid():
-            advisor = Advisor.objects.get(user=request.user)
-            students = form.cleaned_data.get("students")
-            advisor.students.clear()
-            for student in students:
-                advisor.students.add(student)
-            advisor.save()
-            return HttpResponseRedirect("/advisement/")
-    else:
-        try:
-            advisor = Advisor.objects.get(user=request.user)
-            print(advisor)
-            # form = CreateAdvisorStudentPair(advisor.students.all())
-            form = CreateAdvisorStudentPair() #TODO: make form auto-fill with existing info
-        except ObjectDoesNotExist:
-            form = CreateAdvisorStudentPair()
-
-    return render(request, 'advisement/add_adv_student_pair.html', {'form': form})
+from .forms import AddChecksheet, AddAdvisee
 
 
 def home(request):
@@ -46,22 +24,6 @@ def advisee_overview(request, advisee):
     advisee = Advisee.objects.get(pk=advisee)
     advisement_sessions = ChecksheetInstance.objects.filter(advisee=advisee)
     return render(request, "advisement/student_overview.html", {"advisee": advisee, "advisements": advisement_sessions})
-
-
-def add_major(request, student):
-    student_user = User.objects.get(pk=student)
-    if request.method == "POST":
-        form = StudentChecksheetSelect(request.POST)
-        if form.is_valid():
-            student = Student(user=student_user, template_filename=form.cleaned_data.get("choice"))
-            student.save()
-            return HttpResponseRedirect(f"../../add_advisement/{student_user.pk}/") #FIXME: bad relative hardcoding
-
-        else:
-            return HttpResponse("error saving major")
-    else:
-        form = StudentChecksheetSelect()
-        return render(request, "advisement/add_major.html", {"form": form})
 
 
 def add_advisement(request, advisee):
