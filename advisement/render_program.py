@@ -1,19 +1,65 @@
-def render(checksheet, program_title):
-    html = f"<div class=program><h1 class=title>{program_title}</h1>"
-    id_gen = id_generator()
-    for title, data in checksheet.items():
-        html += f"<div class=req><h1>{title}</h1><h2>{data['description']}</h2><table>"
-        html += "<tr><th>Course</th><th>CR</th><th>Grade</th></tr>"
-        if data["type"] == "reqlist":
-            html += reqlist(data, id_gen)
-        elif data["type"] == "creditdemand":
-            html += creditdemand(data, id_gen)
-        html += "</table></div>"
+"""
+This file contains utilities to transform a JSON description of a university program into an HTML form respresenting
+the described checksheet.
+"""
 
-    #collapse parentheses
+from .models import ChecksheetTemplate
+import json
+
+
+"""accept an object describing a checksheet (parsed from json) and the title the checksheet should have. Returns a 
+string containing and HTML form. """
+def render(checksheet, program_title, id_gen=None):
+    html = f"<div class=program><h1 class=title>{program_title}</h1>"
+
+    #in order to serialize and unserialize the form state, the inputs and textareas must have a name. Ideally, these
+    #names would be shared across checksheets for equivalent programs, allowing for the migration of data between
+    #different uni programs. Right now, we just give every input an incrementing id.
+    # allowing the id generator to be passed in enables numerous programs to share the same id namespace
+    if id_gen == None:
+        id_gen = id_generator()
+
+    #checksheets are made up of blocks of related requirements
+    html += render_elements(checksheet, id_gen)
+
+    # do some hacky string manipulation to replace elements in parentheses with <span>s. This is used to make a tooltip
     html = html.replace("(", "<span class=tooltip title=\"")
     html = html.replace(")", "\">*</span>")
+
     html += "</div>"
+    return html
+
+def render_elements(checksheet, id_gen):
+    html = ""
+    for title, data in checksheet.items():
+        if data["type"] == "include":
+            html += include(title, data, id_gen)
+        else:
+            html += reqblock(title, data, id_gen)
+    return html
+
+
+def include(title, data, id_gen):
+    program = ChecksheetTemplate.objects.get(name=data["name"])
+    obj = json.loads(program.data)
+    return render_elements(obj, id_gen)
+
+
+"""Fill in the border, title, and table headers for a requirement block. 
+
+Accepts a string specifying the title, an object defining a requirement, and an id generator. """
+def reqblock(title, data, id_gen):
+    html = ""
+    # each block has a border, title, and table headers
+    html += f"<div class=req><h1>{title}</h1><h2>{data['description']}</h2><table>"
+    html += "<tr><th>Course</th><th>CR</th><th>Grade</th></tr>"
+
+    # then,
+    if data["type"] == "reqlist":
+        html += reqlist(data, id_gen)
+    elif data["type"] == "creditdemand":
+        html += creditdemand(data, id_gen)
+    html += "</table></div>"
     return html
 
 
