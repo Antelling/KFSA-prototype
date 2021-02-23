@@ -1,0 +1,19 @@
+/* Colors
+White -   #FFFFFF
+Black -   #000000
+Maroon -  #6D1932
+Yellow -  #F7CA32
+Gold -    #B2A56D
+Green -   #71D845
+*/
+
+/* General Styling */
+
+body {
+  background-color: #B2A56D;
+  color: #000000;
+}
+
+a {
+  color: #6D1932;
+}
