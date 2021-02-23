@@ -10,10 +10,60 @@ Green -   #71D845
 /* General Styling */
 
 body {
-  background-color: #B2A56D;
+  background-color: #6D1932;
   color: #000000;
 }
 
 a {
   color: #6D1932;
+}
+
+main {
+  background-color: #B2A56D;
+  border-style: double;
+  border-color: #FFFFFF;
+  border-width: 7px;
+  border-radius: 10px;
+  padding: 20px;
+  min-height: 90%;
+}
+
+/*div {
+  margin: 25px 0px;
+}*/
+
+form {
+  margin: 10px;
+}
+
+/* Buttons */
+:not(h6)>a {
+  background-color: #F7CA32;
+  padding: 10px;
+  margin: 5px 0px;
+  border-style: solid;
+  border-color: #6D1932;
+  border-width: 1px;
+  border-radius: 3px;
+  display: inline-block;
+  text-decoration-line: none;
+}
+
+:not(h6)>a:hover {
+  background-color: #FFD53A;
+}
+
+p>a {
+  margin: 0px;
+}
+
+/* Student List */
+.student {
+  font-size: 1.5em;
+  margin: 0px 10px;
+}
+
+.student * {
+  margin: 5px;
+  font-weight: normal;
 }
