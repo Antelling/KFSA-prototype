@@ -18,6 +18,11 @@ body>h1 {
   color: #F7CA32;
 }
 
+h1 {
+  text-decoration: underline;
+  text-decoration-color: #FFFFFF;
+}
+
 a {
   color: #6D1932;
 }
@@ -33,6 +38,10 @@ main {
 }
 
 .half {
+  background-color: #B2A56D;
+}
+
+.wrapper ~ .wrapper {
   background-color: #B2A56D;
 }
 
