@@ -10,17 +10,19 @@
     <link href="{% static 'advisement/checksheet.css' %}" rel="stylesheet">
 </head>
 <body class="csBody">
-    <div id=wrapper>
+    <div class="wrapper">
         <form>
             {{ html |safe }}
-            {% if editable %}
-                <input type="submit" value="save">
-            {% endif %}
         </form>
     </div>
-    <div id=notes><textarea class=notes name="notes">{{ advisement.notes }}</textarea></div>
+    <div class="wrapper">
+        <textarea class=notes name="notes">{{ advisement.notes }}</textarea>
+        {% if editable %}
+            <input class=narrow type="submit" value="save edits">
+        {% endif %}
+        <a class=narrow href="{% url "overview" advisement.advisee.pk %}">Exit advising session</a>
+    </div>
 
-    <a href="{% url "overview" advisement.advisee.pk %}">Exit advising session</a>
 
     <script>
         {% if editable %}
