@@ -12,6 +12,15 @@ Green -   #71D845
 body {
   background-color: #6D1932;
   color: #000000;
+  font-size: 2vh;
+}
+
+body>h1 {
+  color: #F7CA32;
+}
+
+h1 {
+  text-decoration: underline #FFFFFF double;
 }
 
 a {
@@ -28,18 +37,24 @@ main {
   min-height: 90%;
 }
 
-/*div {
-  margin: 25px 0px;
-}*/
+.half {
+  background-color: #B2A56D;
+}
+
+.wrapper ~ .wrapper {
+  background-color: #B2A56D;
+}
 
 form {
   margin: 10px;
 }
 
+
+
 /* Buttons */
 :not(h6)>a {
   background-color: #F7CA32;
-  padding: 10px;
+  padding: 0.5em;
   margin: 5px 0px;
   border-style: solid;
   border-color: #6D1932;
@@ -58,12 +73,12 @@ p>a {
 }
 
 /* Student List */
-.student {
+.student, .advisee {
   font-size: 1.5em;
   margin: 0px 10px;
 }
 
-.student * {
+.student *, .advisee * {
   margin: 5px;
   font-weight: normal;
 }
