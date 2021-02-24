@@ -1,0 +1,52 @@
+{
+  "Required Courses": {
+    "type": "reqlist",
+    "description": "",
+    "credits":[39,39],
+    "courses": [
+      ["CSC 125: Discrete Math for CS II(test thing)", 3],
+      ["CSC 130: IT Fundamentals", 3],
+      ["CSC 135: Comp Sci I", 3],
+      ["CSC 136: Comp Sci II OR CSC 220 OO Multimedia Prog. ", 3],
+      ["CSC 242: Web Programming",3],
+      ["CSC 252: Unix Scripting and Administration",3],
+      ["CSC 253: IT Systems",3],
+      ["CSC 273: Computing Systems Integration",3],
+      ["CSC 311: Computer Networks", 3],
+      ["CSC 341: Information Security",3],
+      ["CSC 356: Introduction to Database Sys", 3],
+      ["CSC 354: Software Engineering I", 3],
+      ["CSC 355: Software Engineering II", 3]
+    ]
+  },
+  "CS Elective Courses": {
+    "type": "reqlist",
+    "description": "18 Credits of additional CSC Courses, number 200 or above and not previously ussed for above requirements, csc 280 and csc 380 cannot be used here",
+    "credits": [18, 18],
+    "credit prefill": 3,
+    "slots": 6
+  },
+  "Concomitant Courses": {
+    "type": "reqlist",
+    "description": "",
+    "credits":[3,3],
+    "courses": [
+      ["MAT 105: College Algebra (or higher)]",3]
+    ]
+  },
+  "Directed General Education": {
+    "type": "reqlist",
+    "description": "The following courses are required to fulfill the computer science requirements and are suffested to satisfy general education.",
+    "courses": [
+      ["PHI 40: Intro to Ethics(B)", 3],
+      ["MAT 140 : Applied Stat Methods(C. 2)", 3]
+    ]
+  },
+  "Free Electives": {
+    "type": "creditdemand",
+    "description": "any course carrying university credit",
+    "slots": 6,
+    "credit prefill": -1,
+    "credits": [15, 18]
+  }
+}

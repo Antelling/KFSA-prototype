@@ -1,0 +1,55 @@
+{
+    "Required Courses": {
+        "type": "reqlist",
+        "description": "",
+        "courses": [
+            ["CSC 125: Discrete Math for CS II(test thing)", 3],
+            ["CSC 130: IT Fundamentals",3],
+            ["CSC 135: Comp Sci I", 3],
+            ["CSC 136: Comp Sci II OR CSC 220: OO Multimedia Prog. OR CSC 223 Advanced Scientific Prog.", 3],
+            ["CSC 242: Web Programming", 3],
+            ["CSC 253: IT Systems", 3],
+            ["CSC 311: Computer NetWorks", 3],
+            ["CSC 341: Information Security", 3],
+            ["CSC 356: Introduction to Database System", 3],
+            ["CSC 354: Software Engineering I", 3],
+            ["CSC 355: Software Engineering II",3 ]
+            ]
+        },
+    "CS Elective Courses": {
+      "type": "creditdemand",
+      "description": "24 credits of additional CSC courses, number 200 or above and not previously used for above requirements.",
+      "credits": [24, 24],
+      "credit prefill": 3,
+      "slots": 8
+    },
+    "Concomitant Courses":  {
+        "type": "reqlist",
+        "description": "",
+        "subcategory":{
+            "1. Require Courses" :{
+                "type": "creditdemand"
+                "credit":[9,9],
+                "description":"",
+                "courses": [
+                  ["MAT 181: Calculus", 3],
+                  ["MAT 260: Linear Algebra", 3],
+                  ["WRI (elective higher than 181, not 224)", 3],
+                  ["MAT 140 or 301: Applied Stat Methods", -1],
+                  ["WRI 205: Scientific Writing OR WRI 207: Writting for the Workplace OR WRI 220: Technical Writing and Comm.", -1],
+                  ["PHI 040: Intro to Ethics",-1],
+                ]
+
+            },
+            "2. Internship - optional"
+            "type":"optional",
+            "description": "Gen Ed free elective",
+            "credit": [0,12],
+            "course": [
+                ["CSC 280: Cooperative Internship I", 3],
+                ["CSC 380: Cooperative Internship II", 3]
+            ]
+        }
+      }
+    
+}
