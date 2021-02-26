@@ -2,9 +2,9 @@
 
 to run: 
 
-`pipenv shell
+`pipenv shell`
 
-python manage.py migrate
+`python manage.py migrate`
 
-python manage.py runserver`
+`python manage.py runserver`
 
