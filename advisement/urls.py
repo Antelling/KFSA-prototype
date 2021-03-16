@@ -5,10 +5,9 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='adv_home'),
-    path('student_overview/<int:advisee>/', views.advisee_overview, name="overview"),
-    path('add_advisement/<int:advisee>/', views.add_advisement, name="add_advisement"),
-    path('edit_advisement/<int:advisement>', views.edit_advisement, name="edit_advisement"),
-    path('view_advisement/<int:advisement>', views.view_advisement, name="view_advisement"),
+    path('add_session/<int:advisee>/', views.add_advisement, name="add_advisement"),
+    path('edit_session/<int:advisement>', views.edit_advisement, name="edit_advisement"),
+    path('view_session/<int:advisement>', views.view_advisement, name="view_advisement"),
 
 
     path('checksheets/', views.checksheet_listing, name="list_checksheets"),

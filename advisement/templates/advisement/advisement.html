@@ -16,62 +16,99 @@
         </form>
     </div>
     <div class="wrapper">
-        <textarea class=notes name="notes">{{ advisement.notes }}</textarea>
-        {% if editable %}
-            <input class=narrow type="submit" value="save edits">
+        {# link back to list of students #}
+        <a class=narrow href="{% url "adv_home" %}">Exit advising session</a>
+        {% if not editable %}
+        <a class=narrow href="{% url "edit_advisement" advisement.pk %}">Edit this session</a>
         {% endif %}
-        <a class=narrow href="{% url "overview" advisement.advisee.pk %}">Exit advising session</a>
+
+        {# display creation and update dates of this session #}
+        <div id="edit-dates">
+            <p>
+                Created: {{ advisement.created_at }}
+            </p>
+            <p>
+                Updated: {{ advisement.updated_at}}
+            </p>
+        </div>
+
+        {# session notes #}
+        <div id="current-notes">
+            <h3>Session Notes:</h3>
+            {% if editable %}
+                <textarea class=notes name="notes">{{ advisement.notes }}</textarea>
+                <button class=narrow onclick="save_form()">Save Edits</button>
+            {% else %}
+                <div class=notes>{{ advisement.notes }}</div>
+            {% endif %}
+        </div>
+
+        <hr/>
+
+        {# summary of other sessions recorded for this student#}
+        <div id="records">
+            <h5> Other Advisement Sessions for {{ advisement.advisee.name }} </h5>
+            {% for r in record %}
+                {% if r != advisement %}
+                    <div class="record">
+                        <span class="hidden advise-data">{{ r.data | safe }}</span>
+                        <span class="hidden checksheet-data">{{ html | safe }}</span>
+                        <p><b>{{ r.created_at }}</b> | <b>{{ r.updated_at}} </b></p>
+                        <p>
+                            {{ r.notes }}
+                        </p>
+                        <p><a class="plain" href="{% url "view_advisement" r.pk %}">view past checksheet</a></p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
     </div>
 
+    {{ advisement.data |json_script:"checksheet-data" }}
 
     <script>
-        {% if editable %}
 
-            $( "form" ).on( "submit", function( event ) {
-                event.preventDefault();
-                save_form();
+        {#window.setInterval(save_form, 5000);#}
+
+        //https://stackoverflow.com/questions/11338774/serialize-form-data-to-json
+        function getFormData($form) {
+            var unindexed_array = $form.serializeArray();
+            var indexed_array = {};
+            $.map(unindexed_array, function (n, i) {
+                indexed_array[n['name']] = n['value'];
             });
-
-            window.setInterval(save_form, 5000);
-
-            //https://stackoverflow.com/questions/11338774/serialize-form-data-to-json
-            function getFormData($form) {
-                var unindexed_array = $form.serializeArray();
-                var indexed_array = {};
-                $.map(unindexed_array, function (n, i) {
-                    indexed_array[n['name']] = n['value'];
-                });
-                return JSON.stringify(indexed_array);
-            }
-
-            function save_form() {
-                let serialization = getFormData($('form'));
-                let notes = $('textarea').val();
-                console.log("saving: ", serialization);
-                data = {
-                    'serialization': serialization,
-                    'notes': notes,
-                    'csrfmiddlewaretoken': '{{ csrf_token }}'
-                }
-                $.post(
-                    window.location, data, function (response) {
-                        console.log(response);
-                    }
-                );
-            }
-
-        {% endif %} //FIXME: we will need additional security control
-
-        //called once at page load, populates checksheet from database information
-        function load_form() {
-           let raw_data ='{{ advisement.data |safe }}'; //FIXME: replace |safe with |json_script so that the data can
-                                                        //contain single quote characters
-           let serialized_data =  JSON.parse(raw_data);
-           $('form').deserialize(serialized_data);
+            return JSON.stringify(indexed_array);
         }
 
-        //called once, after everything else has loaded and ran
-        load_form();
+        function save_form() {
+            let serialization = getFormData($('form'));
+            let notes = $('textarea').val();
+            console.log("saving: ", serialization);
+            data = {
+                'serialization': serialization,
+                'notes': notes,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            }
+            $.post(
+                window.location, data, function (response) {
+                    console.log(response);
+                }
+            );
+        }
+
+
+        //populate checksheet form from database information
+        function load_form() {
+            //yes, it's on purpose. Don't change it.
+            let serialized_data = JSON.parse(JSON.parse(document.getElementById('checksheet-data').textContent));
+            $('form').deserialize(serialized_data);
+        }
+
+        //pass a function to jquery that it will call after page load
+        $( document ).ready(function() {
+            //fill in the input form with data from the most recent past advisement
+            load_form();
+        });
     </script>
 </body>
 </html>

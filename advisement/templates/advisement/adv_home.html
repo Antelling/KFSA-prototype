@@ -4,7 +4,11 @@
 
 {% block content %}
 
-    <p>Hi {{ user.username }}! Welcome to the advisment system.</p>
+    <div>
+        <a href="{% url 'home' %}">Home</a>
+    </div>
+
+    <hr>
 
     {%  if faculty.can_upload_checksheets %}
         <div>
@@ -24,21 +28,34 @@
         </div>
     {% endif %}
 
+    <hr>
 
     {%  if faculty.can_advise %}
         <h1>Your students</h1>
 
-        {% for student in students %}
-            <div class="students">
-                <div class="student">
-                    <h6>{{ student.name }} - <a href="{% url 'overview' student.pk %}">Overview</a></h6>
-                </div>
-            </div>
-        {% endfor %}
+        <table class="students">
+            <tr>
+                <th>Name</th>
+                <th>Advisors</th>
+                <th></th>
+                <th></th>
+            </tr>
+            {% for pair in student_adv_pairs %}
+                <tr>
+                    <td>{{ pair.0.name }}</td>
+                    <td>{{ pair.2}}</td>
+                    <td>
+                        {% if pair.1 %}
+                            <a class="plain" href="{% url "view_advisement" pair.1.pk %}">view most recent advisement session</a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a class="plain" href="{% url "add_advisement" pair.0.pk %}">add new advisement session</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
     {% endif %}
 
-    <div>
-        <a href="{% url 'home' %}">Home</a>
-    </div>
 
 {% endblock %}

@@ -10,6 +10,7 @@ from . import render_program
 from .forms import AddChecksheet, AddAdvisee
 
 
+"""homepage of the advisement system. Kind of dumb since advisement is the only system. """
 def home(request):
     try:
         faculty = Faculty.objects.get(user=request.user)
@@ -17,13 +18,16 @@ def home(request):
         return HttpResponseRedirect(reverse("set_perm"))
 
     students = Advisee.objects.filter(advisors__in=[faculty])
-    return render(request, 'advisement/adv_home.html', {'students': students, 'faculty': faculty})
+    zipped = []
+    for student in students:
+        try:
+            most_recent_advisement = ChecksheetInstance.objects.filter(advisee=student).order_by('-created_at')[0]
+        except IndexError:
+            most_recent_advisement = None
+        zipped.append([student, most_recent_advisement, ", ".join([f.user.username for f in student.advisors.all()])])
 
+    return render(request, 'advisement/adv_home.html', {'student_adv_pairs': zipped, 'faculty': faculty})
 
-def advisee_overview(request, advisee):
-    advisee = Advisee.objects.get(pk=advisee)
-    advisement_sessions = ChecksheetInstance.objects.filter(advisee=advisee)
-    return render(request, "advisement/student_overview.html", {"advisee": advisee, "advisements": advisement_sessions})
 
 
 def add_advisement(request, advisee):
@@ -37,7 +41,7 @@ def add_advisement(request, advisee):
     except IndexError:
         data = ""
 
-    #create a new advisement record
+    #create a new advisement recor_sessiond
     new_advisement = ChecksheetInstance(template=advisee.checksheet, advisee=advisee, advisor=faculty,
                                         data=data)
     new_advisement.save()
@@ -56,16 +60,21 @@ def edit_advisement(request, advisement):
         return HttpResponse("save successful")
     else:
         # render a checksheet to html
+        past_advisements = ChecksheetInstance.objects.filter(advisee=advisement.advisee).exclude(id=advisement.id)\
+            .order_by('-created_at')
         program = advisement.template.data
         html = render_program.render(json.loads(program), advisement.template.name)
-        return render(request, "advisement/advisement.html", {'html': html, 'advisement': advisement, "editable": True})
+        return render(request, "advisement/advisement.html", {'html': html, 'advisement': advisement, "editable": True, "record": past_advisements})
 
 
 def view_advisement(request, advisement):
     advisement = ChecksheetInstance.objects.get(pk=advisement)
+    past_advisements = ChecksheetInstance.objects.filter(advisee=advisement.advisee).exclude(id=advisement.id) \
+        .order_by('-created_at')
     program = advisement.template.data
     html = render_program.render(json.loads(program), advisement.template.name)
-    return render(request, "advisement/advisement.html", {'html': html, 'advisement': advisement, "editable": False})
+    return render(request, "advisement/advisement.html",
+                  {'html': html, 'advisement': advisement, "editable": False, "record": past_advisements})
 
 
 def checksheet_listing(request):
