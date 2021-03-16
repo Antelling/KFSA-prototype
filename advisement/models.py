@@ -22,8 +22,9 @@ class ChecksheetInstance(models.Model):
     advisee = models.ForeignKey(Advisee, on_delete=models.CASCADE)
     advisor = models.ForeignKey(Faculty, on_delete=models.CASCADE)
     data = models.TextField()
-    date = models.DateTimeField(auto_now=True)
     notes = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "ChecksheetInstance<advisor: " + self.advisor.user.username + ", student: " + self.advisee.name \

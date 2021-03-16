@@ -82,3 +82,20 @@ p>a {
   margin: 5px;
   font-weight: normal;
 }
+
+.hidden {
+  display: none;
+}
+
+table{
+  width: 100%;
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.plain {
+  border: none;
+  background-color: inherit;
+}
+

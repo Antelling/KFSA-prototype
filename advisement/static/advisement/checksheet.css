@@ -5,12 +5,9 @@
     justify-content: space-around;
 }
 
-#wrapper div {
-    padding: 0;
-    margin: 30px;
-}
 
 .wrapper {
+    border-radius: 5px;
     display: inline-flex;
     flex-direction: column;
     text-align: center;
@@ -82,12 +79,88 @@
 }
 
  textarea {
-     height: 30vh;
+     display: block;
+     border-radius: 5px;
+     height: 300px;
      margin: 10px;
      padding: 5px;
+     width: calc(100% - 40px);
+     max-width: calc(100% - 40px);
+     font-size: .95em;
+     font-family: sans-serif;
  }
 
  .narrow{
      margin: 10px;
      width: 50%;
  }
+
+ #records {
+     background-color: #dddddd;
+     margin: 10px;
+     border-radius: 5px;
+ }
+
+ .record {
+     border-radius: 5px;
+     background-color: white;
+     margin: 10px;
+     padding: 5px;
+ }
+
+ /* class given to buttons to roll back old advisement state */
+ .rollback {
+    cursor: pointer;
+ }
+
+ .notes{
+     background-color: white;
+     border-radius: 5px;
+     margin: 10px;
+     padding: 10px;
+     text-align: left;
+ }
+
+ p {
+     margin-top: 0;
+     text-align: left;
+     /*margin-left: 10px;*/
+ }
+
+ .record p:last-child {
+    margin-bottom: 0;
+ }
+
+ /* header for notes */
+ h3 {
+     text-align: left;
+     margin-bottom: 0;
+     margin-top: 0;
+     margin-left: 10px;
+ }
+
+/*give dates the same margins as everything else*/
+#edit-dates {
+    margin: 10px;
+    margin-bottom: 40px;
+}
+
+hr {
+    height: 3px !important;
+    border: none;
+    border-radius: 1px;
+    background-color: black;
+    color: black;
+    display: block;
+    margin: 10px;
+}
+
+#edit-dates {
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#edit-dates p:last-child{
+    margin-bottom: 0;
+}
