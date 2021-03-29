@@ -28,6 +28,11 @@
         </div>
     {% endif %}
 
+    <!-- This needs some sort of limit to who can use it -->
+    <div>
+    <a href="{% url 'faculty_list' %}">Manage Faculty</a>
+    </div>
+
     <hr>
 
     {%  if faculty.can_advise %}

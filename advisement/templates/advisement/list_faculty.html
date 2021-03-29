@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Faculty{% endblock %}
+
+{% block content %}
+    <h1>Faculty</h1>
+
+    <table class="students">
+        <tr>
+            <th>Name</th>
+            <th></th>
+        </tr>
+        {% for advisor in advisors %}
+            <tr>
+                <td>{{ advisor.user.username }}</td>
+                <td>
+                    <a class="plain" href="{% url "edit_faculty" advisor.pk %}">Edit Faculty </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+<br/>
+<a href="{% url 'adv_home' %}">Home </a>
+{% endblock %}
