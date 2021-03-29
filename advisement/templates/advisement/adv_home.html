@@ -24,9 +24,14 @@
 
     {%  if faculty.can_assign_students %}
         <div>
-        <a href="{% url 'advisee_list' %}">Edit Advisee Assignments</a>
+        <a href="{% url 'advisee_list' %}">Manage Students</a>
         </div>
     {% endif %}
+
+    <!-- This needs some sort of limit to who can use it -->
+    <div>
+    <a href="{% url 'faculty_list' %}">Manage Faculty</a>
+    </div>
 
     <hr>
 

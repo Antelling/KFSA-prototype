@@ -8,6 +8,7 @@ from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 import os, json
 from . import render_program
 from .forms import AddChecksheet, AddAdvisee
+from accounts.forms import PermissionSelect
 
 
 """homepage of the advisement system. Kind of dumb since advisement is the only system. """
@@ -113,12 +114,58 @@ def add_students(request):
         form = AddAdvisee()
         return render(request, "advisement/add_advisee.html", {"form": form})
 
+
 def advisee_list(request):
     advisees = Advisee.objects.all()
-    return render(request, "advisement/list_advisees.html", {'advisees': advisees})
+    zipped = []
+    for advisee in advisees:
+        try:
+            most_recent_advisement = ChecksheetInstance.objects.filter(advisee=advisee).order_by('-created_at')[0]
+        except IndexError:
+            most_recent_advisement = None
+        zipped.append([advisee, most_recent_advisement, ", ".join([f.user.username for f in advisee.advisors.all()])])
+    return render(request, "advisement/list_advisees.html", {'advisee_pairs': zipped})
+
 
 def edit_advisee(request, advisee):
+    student = Advisee.objects.get(pk=advisee)
     if request.method == "POST":
-        pass
+        form = AddAdvisee(request.POST)
+        if form.is_valid():
+            student.name = request.POST.get("name")
+            student.id_number = request.POST.get("id_number")
+            student.advisors.set(request.POST.get("advisors"))
+            student.checksheet = ChecksheetTemplate.objects.get(pk=request.POST.get("checksheet"))
+            student.save()
+            return HttpResponseRedirect(reverse("advisee_list"))
     else:
-        return HttpResponse("edit an advisee")
+        form = AddAdvisee(initial={'name':student.name,
+                                   'id_number':student.id_number,
+                                   'advisors':student.advisors.all,
+                                   'checksheet':student.checksheet
+                                   })
+        # form = AddAdvisee()
+        return render(request, "advisement/edit_advisee.html", {"form": form})
+
+
+def faculty_list(request):
+    advisors = Faculty.objects.all()
+    return render(request, "advisement/list_faculty.html", {'advisors': advisors})
+
+
+def edit_faculty(request, faculty):
+    advisor = Faculty.objects.get(pk=faculty)
+    if request.method == "POST":
+        advisor.can_advise = request.POST.get("can_advise")=="on"
+        advisor.can_upload_checksheets = request.POST.get("can_upload_checksheets")=="on"
+        advisor.can_add_students = request.POST.get("can_add_students")=="on"
+        advisor.can_assign_students = request.POST.get("can_assign_students")=="on"
+        advisor.save()
+        return HttpResponseRedirect(reverse("faculty_list"))
+    else:
+        form = PermissionSelect(initial={'can_advise':advisor.can_advise,
+                                         'can_upload_checksheets':advisor.can_upload_checksheets,
+                                         'can_add_students':advisor.can_add_students,
+                                         'can_assign_students':advisor.can_assign_students
+                                         })
+        return render(request, "advisement/edit_faculty.html", {"form": form})
