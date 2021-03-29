@@ -11,12 +11,12 @@
             <th>Advisors</th>
             <th></th>
         </tr>
-        {% for advisee in advisee_pairs %}
+        {% for pair in advisee_pairs %}
             <tr>
                 <td>{{ pair.0.name }}</td>
                 <td>{{ pair.2 }}</td>
                 <td>
-                    <a class="plain" href="{% url "edit_Advisee" pair.1.pk %}">Edit Student </a>
+                    <a class="plain" href="{% url "edit_advisee" pair.0.pk %}">Edit Student </a>
                 </td>
             </tr>
         {% endfor %}

@@ -113,6 +113,7 @@ def add_students(request):
         form = AddAdvisee()
         return render(request, "advisement/add_advisee.html", {"form": form})
 
+
 def advisee_list(request):
     advisees = Advisee.objects.all()
     zipped = []
@@ -124,8 +125,23 @@ def advisee_list(request):
         zipped.append([advisee, most_recent_advisement, ", ".join([f.user.username for f in advisee.advisors.all()])])
     return render(request, "advisement/list_advisees.html", {'advisee_pairs': zipped})
 
+
 def edit_advisee(request, advisee):
+    student = Advisee.objects.get(pk=advisee)
     if request.method == "POST":
-        pass
+        form = AddAdvisee(request.POST)
+        if form.is_valid():
+            student.name = request.POST.get("name")
+            student.id_number = request.POST.get("id_number")
+            student.advisors.set(request.POST.get("advisors"))
+            student.checksheet = ChecksheetTemplate.objects.get(pk=request.POST.get("checksheet"))
+            student.save()
+            return HttpResponseRedirect(reverse("advisee_list"))
     else:
-        return HttpResponse("edit an advisee")
+        form = AddAdvisee(initial={'name':student.name,
+                                   'id_number':student.id_number,
+                                   'advisors':student.advisors.all,
+                                   'checksheet':student.checksheet
+                                   })
+        # form = AddAdvisee()
+        return render(request, "advisement/edit_advisee.html", {"form": form})
