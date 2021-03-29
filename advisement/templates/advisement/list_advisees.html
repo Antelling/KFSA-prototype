@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Students{% endblock %}
+
+{% block content %}
+    <h1>Students</h1>
+
+    <table class="students">
+        <tr>
+            <th>Name</th>
+            <th>Advisors</th>
+            <th></th>
+        </tr>
+        {% for advisee in advisee_pairs %}
+            <tr>
+                <td>{{ pair.0.name }}</td>
+                <td>{{ pair.2 }}</td>
+                <td>
+                    <a class="plain" href="{% url "edit_Advisee" pair.1.pk %}">Edit Student </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+<br/>
+<a href="{% url 'adv_home' %}">Home </a>
+{% endblock %}

@@ -115,7 +115,14 @@ def add_students(request):
 
 def advisee_list(request):
     advisees = Advisee.objects.all()
-    return render(request, "advisement/list_advisees.html", {'advisees': advisees})
+    zipped = []
+    for advisee in advisees:
+        try:
+            most_recent_advisement = ChecksheetInstance.objects.filter(advisee=advisee).order_by('-created_at')[0]
+        except IndexError:
+            most_recent_advisement = None
+        zipped.append([advisee, most_recent_advisement, ", ".join([f.user.username for f in advisee.advisors.all()])])
+    return render(request, "advisement/list_advisees.html", {'advisee_pairs': zipped})
 
 def edit_advisee(request, advisee):
     if request.method == "POST":
