@@ -22,16 +22,17 @@
         </div>
     {% endif %}
 
-    {%  if faculty.can_assign_students %}
+    {%  if faculty.can_manage_students %}
         <div>
         <a href="{% url 'advisee_list' %}">Manage Students</a>
         </div>
     {% endif %}
 
-    <!-- This needs some sort of limit to who can use it -->
-    <div>
-    <a href="{% url 'faculty_list' %}">Manage Faculty</a>
-    </div>
+    {%  if faculty.can_manage_faculty %}
+        <div>
+        <a href="{% url 'faculty_list' %}">Manage Faculty</a>
+        </div>
+    {% endif %}
 
     <hr>
 
