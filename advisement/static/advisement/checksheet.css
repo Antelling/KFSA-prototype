@@ -11,7 +11,7 @@
     display: inline-flex;
     flex-direction: column;
     text-align: center;
-    width: 45vw;
+    width: 49vw;
     height: 98vh;
     overflow: auto;
     border: 1px solid black;
@@ -41,10 +41,25 @@
     width: 100%;
     border-collapse: collapse;
 }
+.wrapper th{
+   text-align: left;
+    padding-left: 10px;
+}
+th:nth-child(1){
+    width: 80%;
+}
+th:nth-child(2){
+    width: 5%;
+}
+th:nth-child(3){
+    width: 15%;
+}
 .wrapper td {
     text-align: left;
     /*border-top: 1px solid black;*/
-    padding: 10px;
+    padding-left: 10px;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 .wrapper tr {
     border-top: 1px solid black;
@@ -56,18 +71,17 @@
 
 .wrapper .title {
     background-color: white;
-    font-size: 1.5em;
 }
 
- #wrapper .program, #wrapper .req {
-    border: 1px solid black;
+ .wrapper .program, .wrapper .req {
+    border-top: 3px solid black;
 }
 
- #wrapper select {
+ .wrapper select {
     display: inline;
 }
 
- #wrapper .tooltip {
+ .wrapper .tooltip {
     background-color: #dddddd;
     padding: 5px;
     cursor: pointer;
@@ -85,7 +99,6 @@
      padding: 5px;
      width: calc(100% - 40px);
      max-width: calc(100% - 40px);
-     font-size: .95em;
      font-family: sans-serif;
  }
 
@@ -187,7 +200,12 @@ hr {
     border-radius: 5px;
 }
 
-.section h1 {
+h1 {
+    background-color: #dddddd;
+}
+
+.section > h1 {
     background-color: inherit;
 }
+
 

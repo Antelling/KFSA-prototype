@@ -11,7 +11,7 @@
 </head>
 <body class="csBody">
     <div class="wrapper">
-        <form>
+        <form class="{% if editable %}editable{% else %}uneditable{% endif %}">
             {{ html |safe }}
         </form>
     </div>
@@ -57,7 +57,7 @@
                         <p>
                             {{ r.notes }}
                         </p>
-                        <p><a class="plain" href="{% url "view_advisement" r.pk %}">view past checksheet</a></p>
+                        <p><a target="_blank" class="plain" href="{% url "view_advisement" r.pk %}">view past checksheet</a></p>
                     </div>
                 {% endif %}
             {% endfor %}

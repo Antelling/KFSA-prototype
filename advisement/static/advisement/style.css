@@ -12,7 +12,6 @@ Green -   #71D845
 body {
   background-color: #6D1932;
   color: #000000;
-  font-size: 2vh;
 }
 
 body>h1 {
@@ -97,5 +96,13 @@ table{
 .plain {
   border: none;
   background-color: inherit;
+}
+
+.uneditable select{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+  pointer-events: none;
 }
 
