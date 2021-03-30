@@ -2,15 +2,70 @@
 
 {% block title %}Checksheets{% endblock %}
 
-{% block content %}
-{% for checksheet in checksheets %}
-    <h5>{{ checksheet.name }} </h5> <!-- TODO: add a view function here, to render an empty checksheet -->
-{% empty %}
-    <p>No checksheets are uploaded.</p>
-{% endfor %}
+{% block heading %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-<a href="{% url 'add_checksheet' %}">Upload Checksheet</a>
-<br/>
-<a href="{% url 'list_checksheets' %}">Back</a>
-<a href="{% url 'adv_home' %}">Home </a>
+    <style>
+
+    div {
+        padding: 10px;
+    }
+
+    h5{
+        display: inline;
+    }
+
+    #checksheets {
+        background-color: white;
+        border-radius: 5px;
+    }
+
+    form {
+        display: inline;
+    }
+
+    .csdel {
+        padding: 3px;
+        border-radius: 2px;
+    }
+
+    .unused {
+        color: #6D1932;
+    }
+    .unused:hover {
+        background-color: #FFD63B;
+        cursor: pointer;
+    }
+
+    .used {
+        color: grey;
+    }
+
+</style>
+{% endblock %}
+
+{% block content %}
+    <div id="checksheets">
+        {% for checksheet in checksheets %}
+            <div class="cslink">
+                <h5>{{ checksheet.name }}</h5>
+                {% if checksheet.used %}
+
+                {% else %}
+                    <form method="POST" action="{% url 'delete_checksheet' %}">
+                        {% csrf_token %}
+                        <input name="name" value="{{ checksheet.name }}" type="hidden">
+                        <input type="submit" value="🗑">
+                    </form>
+                {% endif %}
+            </div>
+        {% empty %}
+            <p>No checksheets are uploaded.</p>
+        {% endfor %}
+    </div>
+
+    <a href="{% url 'add_checksheet' %}">Upload Checksheet</a>
+    <br/>
+    <a href="{% url 'list_checksheets' %}">Back</a>
+    <a href="{% url 'adv_home' %}">Home </a>
 {% endblock %}

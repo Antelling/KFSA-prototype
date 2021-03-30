@@ -12,6 +12,7 @@ urlpatterns = [
 
     path('checksheets/', views.checksheet_listing, name="list_checksheets"),
     path('add_checksheet/', views.add_checksheet, name="add_checksheet"),
+    path('delete_checksheet/', views.delete_checksheet, name="delete_checksheet"),
     path('add_students/', views.add_students, name="add_students"),
     path('advisee_list/', views.advisee_list, name="advisee_list"),
     path('edit_advisee/<int:advisee>', views.edit_advisee, name="edit_advisee"),
