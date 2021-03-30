@@ -80,6 +80,10 @@ def view_advisement(request, advisement):
 
 def checksheet_listing(request):
     checksheets = ChecksheetTemplate.objects.all()
+    for checksheet in checksheets:
+        students = Advisee.objects.filter(checksheet=checksheet)
+        if len(students.all()) > 0:
+            checksheet.used = True
     return render(request, "advisement/checksheet_listing.html", {"checksheets": checksheets})
 
 def add_checksheet(request):
@@ -169,3 +173,14 @@ def edit_faculty(request, faculty):
                                          'can_assign_students':advisor.can_assign_students
                                          })
         return render(request, "advisement/edit_faculty.html", {"form": form})
+
+def delete_checksheet(request):
+    name = request.POST.get("name")
+    checksheet = ChecksheetTemplate.objects.get(name=name)
+    students = Advisee.objects.filter(checksheet=checksheet)
+    hmm = len(students.all())
+    if len(students.all()) > 0:
+        return HttpResponse("cannot delete this checksheet, it has students using it. ")
+    else:
+        checksheet.delete()
+        return HttpResponseRedirect(reverse("list_checksheets"))
