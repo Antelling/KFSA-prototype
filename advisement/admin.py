@@ -10,3 +10,7 @@ class ChecksheetInstanceAdmin(admin.ModelAdmin):
 @admin.register(models.ChecksheetTemplate)
 class ChecksheetTemplateAdmin(admin.ModelAdmin):
     pass
+
+@admin.register(models.Advisee)
+class AdviseeAdmin(admin.ModelAdmin):
+    pass

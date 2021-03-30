@@ -34,7 +34,6 @@
 }
 
 .wrapper h2 {
-    font-size: 1.1em;
     font-style: italic;
 }
 
@@ -57,7 +56,7 @@
 
 .wrapper .title {
     background-color: white;
-    font-size: 2.6em;
+    font-size: 1.5em;
 }
 
  #wrapper .program, #wrapper .req {
@@ -164,3 +163,31 @@ hr {
 #edit-dates p:last-child{
     margin-bottom: 0;
 }
+
+.section {
+    background-color: #87CBD8;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.section .section {
+    background-color: #43859A;
+}
+
+.section .section .section {
+    background-color: #00405A;
+    color: white;
+}
+.section .section .section .contents {
+    color: black;
+}
+
+.contents {
+    background-color: white;
+    border-radius: 5px;
+}
+
+.section h1 {
+    background-color: inherit;
+}
+

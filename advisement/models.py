@@ -17,6 +17,9 @@ class Advisee(models.Model):
     advisors = models.ManyToManyField(Faculty)
     checksheet = models.ForeignKey(ChecksheetTemplate, on_delete=models.PROTECT)
 
+    def __str__(self):
+        return "Advisee<" + self.name + ">"
+
 class ChecksheetInstance(models.Model):
     template = models.ForeignKey(ChecksheetTemplate, on_delete=models.PROTECT)
     advisee = models.ForeignKey(Advisee, on_delete=models.CASCADE)
