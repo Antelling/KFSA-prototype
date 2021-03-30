@@ -1,0 +1,112 @@
+{
+  "Required": {
+    "type": "reqlist",
+    "courses": [["CSC 402: Data Structures II", 3]],
+    "description": "3 credits"
+  },
+  "Foundational Courses": {
+    "type": "reqlist",
+    "courses": [
+      ["CSC 421: Web-Based Design and Develop", 3],
+      ["CSC 425: Compiler Design I", 3],
+      ["CSC 447: Artificial Intelligence I", 3],
+      ["CSC 456: Database Mgmt Systems I", 3],
+      ["CSC 458: Data Mining & Predictive Anal. I", 3],
+      ["CSC 459: Introduction to Big Data", 3],
+      ["CSC 510: Advanced Operating Systems", 3],
+      ["CSC 520: Adv Object Oriented Program", 3],
+      ["CSC 521: Adv Web-Based Sofware Devel.", 3],
+      ["CSC 526: Compiler Design II", 3],
+      ["CSC 543: Multiprocessing & Concurrent Prg", 3],
+      ["CSC 548: Artificial Intelligence II", 3],
+      ["CSC 552: Advanced Unix Programming", 3],
+      ["CSC 556: Database Mgmt Systems II", 3],
+      ["CSC 558: Data Mining & Predictive Anal. II", 3]
+    ],
+    "description": "12 - 27 credits, no more than 12 of which may come from 400 level courses."
+  },
+  "Optional Thesis": {
+    "description": "0 or 6 credits",
+    "type": "reqlist",
+    "courses": [
+      ["CSC 599: Thesis", 6]
+    ]
+  },
+  "Elective Courses": {
+    "type": "creditdemand",
+    "description": "0-9 credits",
+    "credits": [0, 9],
+    "credit prefill": 3,
+    "slots": 3
+  },
+  "Depth Area": {
+    "type": "section",
+    "description": "Satisfy at least one depth category by taking two courses from a category, one of which must be a 500 level.",
+    "data": {
+      "Compiler": {
+        "description": "",
+        "type": "reqlist",
+        "courses": [
+          ["CSC 425", 3],
+          ["CSC 526", 3]
+        ]
+      },
+
+      "AI": {
+        "description": "",
+        "type": "reqlist",
+        "courses": [
+          ["CSC 445", 3],
+          ["CSC 447", 3],
+          ["CSC 548", 3]
+        ]
+      },
+
+      "Database": {
+        "description": "",
+        "type": "reqlist",
+        "courses": [
+          ["CSC 456", 3],
+          ["CSC 556", 3]
+        ]
+      },
+
+      "Web": {
+        "description": "",
+        "type": "reqlist",
+        "courses": [
+          ["CSC 421", 3],
+          ["CSC 464", 3],
+          ["CSC 521", 3]
+        ]
+      },
+
+      "OO/Functional Design and Develop": {
+        "description": "",
+        "type": "reqlist",
+        "courses": [
+          ["CSC 520", 3],
+          ["CSC 543", 3]
+        ]
+      },
+
+      "Operating Systems": {
+        "description": "",
+        "type": "reqlist",
+        "courses": [
+          ["CSC 543", 3],
+          ["CSC 552", 3]
+        ]
+      },
+
+      "Data Analytics": {
+        "description": "",
+        "type": "reqlist",
+        "courses": [
+          ["CSC 458", 3],
+          ["CSC 558", 3]
+        ]
+      }
+    }
+  }
+}
