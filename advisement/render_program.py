@@ -34,6 +34,8 @@ def render_elements(checksheet, id_gen):
     for title, data in checksheet.items():
         if data["type"] == "include":
             html += include(title, data, id_gen)
+        elif data["type"] == "section":
+            html += section(title, data, id_gen)
         else:
             html += reqblock(title, data, id_gen)
     return html
@@ -44,6 +46,12 @@ def include(title, data, id_gen):
     obj = json.loads(program.data)
     return render_elements(obj, id_gen)
 
+def section(title, data, id_gen):
+    html = "<div class=section><h1>" + title + "<span class=toggle-vis>👁️</span></h1>"
+    html += "<p>" + data["description"] + "</p>"
+    html += "<div class=contents>" + render_elements(data["data"], id_gen) + "</div>"
+    html += "</div>"
+    return html
 
 """Fill in the border, title, and table headers for a requirement block. 
 

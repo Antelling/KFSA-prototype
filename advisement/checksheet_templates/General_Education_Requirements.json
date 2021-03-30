@@ -1,4 +1,24 @@
 {
+  "The Science Half": {
+    "type": "section",
+    "description": "yeah science",
+    "data": {
+      "C. Understanding Science and Technology": {
+        "type": "creditdemand",
+        "description": "A Scientific Inquiry course, a Quantitative Reasoning course, and a course approved for C1 or C2. Courses that share the student's major prefix may not be used.",
+        "credits": [9, 12],
+        "credit prefill": -1,
+        "slots": 3
+      },
+      "D. Understanding and Creating Ideas": {
+        "type": "creditdemand",
+        "description": "Three category D courses. Courses that share the student's major prefix may not be used.",
+        "credits": [9, 9],
+        "credit prefill": -1,
+        "slots": 3
+      }
+    }
+  },
   "First Year Seminar": {
     "type": "creditdemand",
     "description": "A course numbered FYS 100. Transfer students transferring 30 credits or more may select any approved general education course to meet their FYS requirement.",
@@ -6,32 +26,43 @@
     "credit prefill": 3,
     "slots": 1
   },
-  "A. Communicating with and About the World": {
-    "type": "creditdemand",
-    "description": "Must include  CMP 100 level course, a CMP 200 level course, an A2 speaking course, and an A2 or A3 course. Courses that share the student's major prefix may not be used.",
-    "credits": [12, 12],
-    "credit prefill": 3,
-    "slots": 4
-  },
-  "B. Understanding Self and Others": {
-    "type": "creditdemand",
-    "description": "Three category B courses. Courses that share the student's major prefix may not be used.",
-    "credits": [9, 9],
-    "credit prefill": -1,
-    "slots": 3
-  },
-  "C. Understanding Science and Technology": {
-    "type": "creditdemand",
-    "description": "A Scientific Inquiry course, a Quantitative Reasoning course, and a course approved for C1 or C2. Courses that share the student's major prefix may not be used.",
-    "credits": [9, 12],
-    "credit prefill": -1,
-    "slots": 3
-  },
-  "D. Understanding and Creating Ideas": {
-    "type": "creditdemand",
-    "description": "Three category D courses. Courses that share the student's major prefix may not be used.",
-    "credits": [9, 9],
-    "credit prefill": -1,
-    "slots": 3
+  "Know Thyself": {
+    "type": "section",
+    "description": "its needed for programming",
+    "data": {
+      "A. Communicating with and About the World": {
+        "type": "creditdemand",
+        "description": "Must include  CMP 100 level course, a CMP 200 level course, an A2 speaking course, and an A2 or A3 course. Courses that share the student's major prefix may not be used.",
+        "credits": [12, 12],
+        "credit prefill": 3,
+        "slots": 4
+      },
+      "B. Understanding Self and Others": {
+        "type": "creditdemand",
+        "description": "Three category B courses. Courses that share the student's major prefix may not be used.",
+        "credits": [9, 9],
+        "credit prefill": -1,
+        "slots": 3
+      },
+      "sub section": {
+        "type": "section",
+        "description": "a sub section",
+        "data": {
+          "sub sub section": {
+            "type": "section",
+            "description": "a sub sub section",
+            "data": {
+              "the deepest, darkest section": {
+                "type": "creditdemand",
+                "description": "we don't dare go... deeper...",
+                "credits": [9, 9],
+                "credit prefill": -1,
+                "slots": 3
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
