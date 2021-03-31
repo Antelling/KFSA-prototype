@@ -91,7 +91,7 @@ def format_credit(cr, id_gen):
     if cr > 0:
         return str(cr)
     else:
-        return f"<input name={next(id_gen)} type='number'/>"
+        return f"<input name={next(id_gen)} type='number' value='3'/>"
 
 def grade_selector(id_gen):
     return f"""

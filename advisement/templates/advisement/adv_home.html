@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %}Advisment{% endblock %}
+{% block title %}Advisement{% endblock %}
 
 {% block content %}
 
     <div>
-        <a href="{% url 'home' %}">Home</a>
+	    <h1>HOME: Your Advisement Page</h1>
+	    <a href="{% url 'home' %}">Account</a>
     </div>
 
     <hr>
@@ -22,21 +23,22 @@
         </div>
     {% endif %}
 
-    {%  if faculty.can_assign_students %}
+    {%  if faculty.can_manage_students %}
         <div>
         <a href="{% url 'advisee_list' %}">Manage Students</a>
         </div>
     {% endif %}
 
-    <!-- This needs some sort of limit to who can use it -->
-    <div>
-    <a href="{% url 'faculty_list' %}">Manage Faculty</a>
-    </div>
+    {%  if faculty.can_manage_faculty %}
+        <div>
+        <a href="{% url 'faculty_list' %}">Manage Faculty</a>
+        </div>
+    {% endif %}
 
     <hr>
 
     {%  if faculty.can_advise %}
-        <h1>Your students</h1>
+        <h2>Your students</h2>
 
         <table class="students">
             <tr>
@@ -46,7 +48,7 @@
                 <th></th>
             </tr>
             {% for pair in student_adv_pairs %}
-                <tr>
+                <tr align = "center">
                     <td>{{ pair.0.name }}</td>
                     <td>{{ pair.2}}</td>
                     <td>

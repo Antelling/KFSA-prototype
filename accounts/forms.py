@@ -10,3 +10,5 @@ class PermissionSelect(forms.Form):
     can_upload_checksheets = forms.BooleanField(required=False)
     can_add_students = forms.BooleanField(required=False)
     can_assign_students = forms.BooleanField(required=False)
+    can_manage_students = forms.BooleanField(required=False)
+    can_manage_faculty = forms.BooleanField(required=False)

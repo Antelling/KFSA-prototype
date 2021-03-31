@@ -8,6 +8,8 @@ class Faculty(models.Model):
     can_upload_checksheets = models.BooleanField()
     can_add_students = models.BooleanField()
     can_assign_students = models.BooleanField()
+    can_manage_students = models.BooleanField()
+    can_manage_faculty = models.BooleanField()
 
     def __str__(self):
         return "Faculty< " + self.user.username + " >"

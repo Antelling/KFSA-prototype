@@ -164,13 +164,17 @@ def edit_faculty(request, faculty):
         advisor.can_upload_checksheets = request.POST.get("can_upload_checksheets")=="on"
         advisor.can_add_students = request.POST.get("can_add_students")=="on"
         advisor.can_assign_students = request.POST.get("can_assign_students")=="on"
+        advisor.can_manage_students = request.POST.get("can_manage_students")=="on"
+        advisor.can_manage_faculty = request.POST.get("can_manage_faculty")=="on"
         advisor.save()
         return HttpResponseRedirect(reverse("faculty_list"))
     else:
         form = PermissionSelect(initial={'can_advise':advisor.can_advise,
                                          'can_upload_checksheets':advisor.can_upload_checksheets,
                                          'can_add_students':advisor.can_add_students,
-                                         'can_assign_students':advisor.can_assign_students
+                                         'can_assign_students':advisor.can_assign_students,
+                                         'can_manage_students':advisor.can_manage_students,
+                                         'can_manage_faculty':advisor.can_manage_faculty
                                          })
         return render(request, "advisement/edit_faculty.html", {"form": form})
 

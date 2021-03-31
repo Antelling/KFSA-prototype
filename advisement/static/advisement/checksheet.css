@@ -282,12 +282,16 @@ h1 {
     background-color: inherit;
 }
 
-.uneditable select{
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    text-indent: 1px;
-    text-overflow: '';
-    pointer-events: none;
-    border: none;
+
+@media screen {
+	p.bodyText {font-family:verdana, arial, sans-serif;}
 }
 
+@media print {
+    h*{color: blue !important }
+    p.bodyText {font-family:georgia, times, serif;}
+
+
+@media screen, print {
+	p.bodyText {font-size:12pt}
+}
