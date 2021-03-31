@@ -213,7 +213,9 @@ h1 {
 }
 
 @media print {
-    h*{color: blue !important }
+    *{color: red !important }
+    .narrow{ display: none }
+    /*.wrapper select{ display: none }*/
     p.bodyText {font-family:georgia, times, serif;}
 }
 
