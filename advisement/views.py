@@ -136,10 +136,10 @@ def edit_advisee(request, advisee):
     if request.method == "POST":
         form = AddAdvisee(request.POST)
         if form.is_valid():
-            student.name = request.POST.get("name")
-            student.id_number = request.POST.get("id_number")
-            student.advisors.set(request.POST.get("advisors"))
-            student.checksheet = ChecksheetTemplate.objects.get(pk=request.POST.get("checksheet"))
+            student.name = form.cleaned_data["name"]
+            student.id_number = form.cleaned_data["id_number"]
+            student.advisors.set(form.cleaned_data["advisors"])
+            student.checksheet = ChecksheetTemplate.objects.get(pk=form.cleaned_data["checksheet"].pk)
             student.save()
             return HttpResponseRedirect(reverse("advisee_list"))
     else:
