@@ -5,11 +5,18 @@
 {% block content %}
 <h1>Add Student</h1>
 
-<form method="POST">
+<form id ="f"  method="POST" >
     {% csrf_token %}
     {{ form }}
-    <input type="submit"/>
+    <input type="submit" value="Submit">
 </form>
-
+<script>
+    var form=document.getElementById('f');
+    form.addEventListener('submit', function ()
+    {
+        alert("Successfully Add Student!");
+    });
+</script>
 <a href="{% url 'adv_home' %}">Home </a>
 {% endblock %}
+

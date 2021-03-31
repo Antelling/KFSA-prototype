@@ -97,6 +97,7 @@ def grade_selector(id_gen):
     return f"""
         <select name={next(id_gen)}>
             <option value="" selected></option>
+            <option value=E>E</option>
             <option value=A>A</option>
             <option value="A-">A-</option>
             <option value="B+">B+</option>
