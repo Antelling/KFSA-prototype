@@ -41,7 +41,7 @@ main {
 }
 
 .wrapper ~ .wrapper {
-  background-color: #B2A56D;
+  background-color: rgb(206, 199, 191);
 }
 
 form {
@@ -96,13 +96,5 @@ table{
 .plain {
   border: none;
   background-color: inherit;
-}
-
-.uneditable select{
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  text-indent: 1px;
-  text-overflow: '';
-  pointer-events: none;
 }
 

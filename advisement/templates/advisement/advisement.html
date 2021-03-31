@@ -6,8 +6,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{% static 'libraries/jquery.deserialize.js' %}"></script>
     <link href="{% static 'advisement/style.css' %}" rel="stylesheet">
-    <title>Checksheet</title>
+    <title>{{ advisement.advisee.name }} | Advise {% if editable %}Entry{% else %}View{% endif %}</title>
     <link href="{% static 'advisement/checksheet.css' %}" rel="stylesheet">
+    <style>
+        body {
+            background-color: white !important;
+        }
+    </style>
 </head>
 <body class="csBody">
     <div class="wrapper">

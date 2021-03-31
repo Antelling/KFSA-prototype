@@ -11,6 +11,8 @@
         form {
             display: flex;
             flex-direction: column;
+            padding: 0;
+            margin: 0;
         }
 
         .container{
@@ -21,7 +23,6 @@
             padding: 10px;
         }
         .half{
-            /*TODO: replace this with the mobile friendly bootstrap equivalent*/
             width: calc(50vw - 12px);
             margin: 5px;
             padding: 0;
@@ -37,11 +38,18 @@
         input[type=submit] {
             width: 50%;
         }
+
+        #title {
+            background-color: inherit;
+            margin-left: 1vw;
+            font-size: 24px;
+            line-height: 0;
+        }
     </style>
 </head>
 <body>
 
-<h1>Checksheet Upload</h1>
+<h1 id="title">Checksheet Upload</h1>
 
 <div class="container">
 
