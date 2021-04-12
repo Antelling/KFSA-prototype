@@ -1,0 +1,87 @@
+{
+    "1.Required Courses": {
+        "type": "reqlist",
+        "slots":11,
+        "credit prefill": 3,
+        "description": "",
+        "courses": [
+            ["CSC 125: Discrete Math for CS I", 3],
+            ["CSC 225: Discrete Math for CS II",3],
+            ["CSC 135: Comp Sci I", 3],
+            ["CSC 136: Comp Sci II", 3],
+            ["CSC 235: Comp Org & Asm. Lng.", 3],
+            ["CSC 237: Data Structures",3],
+            ["CSC 310: Prog. Languages",3],
+            ["CSC 325: Intro to CS Theory", 3],
+            ["CSC 343: Operating System",3],
+            ["CSC 354: Software Engineering", 3],
+            ["CSC 385: Seminar in CSC",3 ]
+            ]
+        },
+    "2. Elective Courses": {
+      "type": "reqlist",
+      "description": "15-24 credits",
+      "credits": [15, 24],
+      "slots":20,
+      "credit prefill": 3,
+     "courses": [
+        
+        ["CSC 241: Adv Visual Basic",3],
+        ["CSC 242: Web Programming", 3],
+        ["CSC 243: Java Programming",3],
+        ["CSC 253: IT Systems", 3],
+        ["CSC 311: Computer NetWorks", 3],
+        ["CSC 320: Intro to Game Progamming",3],
+        ["CSC 341: Information Security", 3],
+        ["CSC 342: Web Technologies",3],
+        ["CSC 351: Digital Forensics",3],
+        ["CSC 352: UNIX: Sys Prog/Adm",3],
+        ["CSC 356: Introduction to Database System", 3],
+        ["CSC 402: Data Structure II",3],
+        ["CSC 411: Advanced Networking",3],
+        ["CSC 421: Web-Based Soft Design & Dev",3],
+        ["CSC 425: Compiler Design I",3],
+        ["CSC 445: Intro to Intelligent Robotics",3],
+        ["CSC 447: Artificial Intelligence I",3],
+        ["CSC 456: Database Mgm Sys I", 3],
+        ["CSC 464: Human Computer Interaction", 3],
+        ["CSC 480: Special Topics", 3]
+     ]
+    },
+    "Concomitant Courses": {
+      "type": "section",
+      "description": "",
+      "data":{
+          "1. Require Courses" :{
+              "type": "reqlist",
+              "credits":[9,9],
+              "description":"",
+              "slots":5,
+              "credit prefill": 3,
+              "courses": [
+                ["MAT 181: Calculus", 4],
+                ["MAT 260: Linear Algebra", 3],
+                ["MAT 140 or 301: Applied Stat Methods", -1],
+                ["WRI 205: Scientific Writing", 3],
+                ["PHI 040: Intro to Ethics",3]
+              ]
+
+          },
+          "2. Internship - optional":{
+          "type":"creditdemand",
+          "description": "Gen Ed free elective: CSC 280: Cooperative Internship I, CSC 380: Cooperative Internship II ",
+          "credits": [0,12],
+          "slots":2,
+          "credit prefill": -1,
+          "courses": [
+              ["CSC 280: Cooperative Internship I", [3,6]],
+              ["CSC 380: Cooperative Internship II", [3,6]]
+          ]
+      }
+        }
+    },
+    "General Education":{
+        "type": "include",
+        "name": "GenEd2118"
+        }
+}

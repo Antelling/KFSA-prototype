@@ -1,0 +1,58 @@
+{
+    "Required Courses": {
+        "type": "reqlist",
+        "slots":11,
+        "credit prefill": 3,
+        "description": "",
+        "courses": [
+            ["CSC 125: Discrete Math for CS II(test thing)", 3],
+            ["CSC 130: IT Fundamentals",3],
+            ["CSC 135: Comp Sci I", 3],
+            ["CSC 136: Comp Sci II", 3],
+            ["CSC 242: Web Programming", 3],
+            ["CSC 253: IT Systems", 3],
+            ["CSC 311: Computer NetWorks", 3],
+            ["CSC 341: Information Security", 3],
+            ["CSC 356: Introduction to Database System", 3],
+            ["CSC 354: Software Engineering I", 3],
+            ["CSC 355: Software Engineering II",3 ]
+            ]
+        },
+    "Concomitant Courses":  {
+            "type": "section",
+            "credits":[3,3],
+            "description": "",
+            "data":{
+                "1. Require Courses" :{
+                    "type": "reqlist",
+                    "credits":[3,3],
+                    "slots":4,
+                    "credit prefill": 3,
+                    "description":"",
+                    "courses": [
+                      ["MAT 105: College Algebra or above ", 3],
+                      ["MAT 140 : Applied Stat Methods",3],
+                      ["WRI 207: Writting for the Workplace", 3],
+                      ["PHI 040: Intro to Ethics",3]
+                    ]
+
+                },
+                "2. Internship - optional":{
+                "type":"creditdemand",
+                "description": "Gen Ed free elective: CSC 280: Cooperative Internship I, CSC 380: Cooperative Internship II",
+                "credits": [0,12],
+                "slots":2,
+                "credit prefill": -1,
+                "courses": [
+                    ["CSC 280: Cooperative Internship I", [3,6]],
+                    ["CSC 380: Cooperative Internship II", [3,6]]
+                ]
+                }
+            }
+           
+    },
+    "General Education":{
+        "type": "include",
+        "name": "GenEd2162
+    }
+}

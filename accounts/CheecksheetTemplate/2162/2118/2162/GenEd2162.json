@@ -1,0 +1,256 @@
+{
+    "I. University Core":
+    {
+        "type": "section",
+        "description": "",
+        "credits": [12,12],
+        "data": {
+            "A. Oral Communication" :
+                {
+                    "type": "creditdemand",
+                    "credits": [3,3],
+                    "credit prefill" :3,
+                    "description": "COM 10 or above",
+                    "slots":1
+                },
+ "B.Written Communication":
+           {
+               "type": "creditdemand",
+               "credits": [3,3],
+               "credit prefill" :3,
+               "description": "ENG 23, 24 or 25",
+               "slots":1
+           },
+  "C. Mathematics" :
+           {
+               "type": "creditdemand",
+               "credits": [3,3],
+               "credit prefill" :3,
+               "description": "MAT 17 or above",
+               "course": ["MAT 140",3],
+               "slots":1
+           },
+       "D. Wellness" :
+           {
+               "type": "creditdemand",
+               "credits": [3,3],
+               "credit prefill" :3,
+               "description": "Any 3-credit HEA course",
+               "slots":1
+           }
+       }
+ },
+ "II. University Distribution":
+  {
+      "type": "section",
+      "description": "",
+      "credits": [15,15],
+      "data": {
+          "A. Natural Sciences" :
+              {
+                  "type": "creditdemand",
+                  "description": "Any lab or non-lab, courses with prefix AST, BIO, CHM , ENV, GEL, MAR, NSE, or PHY or certain GEG course.",
+                  "credits": [3,3],
+               "credit prefill" :3,
+               "slots":1
+              },
+              "B. Social Science":
+               {
+                   "type": "creditdemand",
+                   "description": "Any course with prefix ANT, CRJ, ECO, HIS, INT, MCS, PSY, POL, SOC, SSE or SWK; or certain CEG",
+                   "credits": [3,3],
+                   "credit prefill" :3,
+                   "slots":1
+               },
+           "C. Humanities" :
+               {
+                   "type": "creditdemand",
+                   "description": "Any course with prefix ANT, CRJ, ECO, HIS, INT, MCS, PSY, POL, SOC, SSE or SWK; or certain CEG",
+                   "credits": [3,3],
+                   "credit prefill" :3,
+                   "slots":1
+               },
+               "D. Arts" :
+               {
+                   "type": "creditdemand",
+                   "credits": [3,3],
+                   "credit prefill" :3,
+                   "description": "Any course with prefix ENG, HUM, PAG, PHI, WRI, WGS or Modern Language",
+                   "slots":1
+               },
+           "E. Free Elective" :
+                   {
+                   "type": "creditdemand",
+                   "credits": [3,3],
+                   "credit prefill" :3,
+                   "description": "Any course carrying university credit",
+                       "slots":1
+                   }
+ }
+ },
+ "III. Competencies across the curriculum":
+      {
+          "type": "section",
+          "description": "",
+          "credits": [24,24],
+          "data": {
+          "A. Writing Intensive (WI)" :
+                  {
+                      "type": "creditdemand",
+                      "credits": [9,9],
+                      "credit prefill" :3,
+                      "description": "",
+                      "slots":3
+                  },
+           "B. Quantitative Literacy (QL) or Computer-Intensive (CF)" :
+                   {
+                       "type": "creditdemand",
+                       "credits": [3,3],
+                       "credit prefill" :3,
+                       "description": "",
+                       "slots":1
+                   },"C. Visual Literacy (VL) or Cmomunication-Intensive (CM)" :
+                   {
+                       "type": "creditdemand",
+                       "credits": [3,3],
+                       "credit prefill" :3,
+                       "description": "",
+                       "slots":1
+                   },
+               "D. Cultural Diversity (CD)" :
+                   {
+                       "type": "creditdemand",
+                       "credits": [3,3],
+                       "credit prefill" :3,
+                       "description": "",
+                       "slots":1
+                   },
+               "E. Critical Thinking (CT)" :
+                   {
+                       "type": "creditdemand",
+                       "credits": [3,3],
+                       "credit prefill" :3,
+                       "description": "",
+                       "slots":1
+                   }
+  }
+ },
+ "IV. College Distribution" :
+      {
+          "type": "section",
+          "description": "",
+          "credits": [33,33],
+          "data": {
+              "A. Natural Science, Mathematics and Computer Sceince":
+              {
+                  "type": "section",
+                  "credits": [6,6],
+                  "description": "Choose one course in each subcategory",
+                  "slots":2,
+                 "credit prefill":3,
+                  "data": {
+                      "1. Natural Science with Lab" : {
+                          "type": "creditdemand",
+                          "description": "AST, BIO, CHM, ENV, GEL, PHY, or MAR or GEG",
+                          "credits": [3,4],
+                          "credit prefill" :-1,
+                          "slots":1
+                      },
+                      "2. Elective" :{
+                          "type": "creditdemand",
+                          "description": "ASY, BIO, CHM, CSC, ENV, VEG, GEL, MAR, MAT, NSE or PHY",
+                          "credits": [3,3],
+                          "credit prefill" :3,
+                          "slots":1
+                      }
+                      }
+                  },
+  "B. Social Science":
+              {
+                  "type": "section",
+                  "credits": [9,9],
+                  "description": "Choose one course in each subcategory",
+                     "slots":2,
+                 "credit prefill":3,
+                  "data": {
+                      "1. Elective":{
+                          "type": "creditdemand",
+                          "description": "HIS, ANT, GEG, or POL",
+                          "credits": [3,3],
+                          "credit prefill" :3,
+                          "slots":1
+                      },
+                      "2. Elective":{
+                          "type": "creditdemand",
+                          "description": "PSY, SOC, CRJ, or SWK",
+                          "credits": [3,3],
+                          "credit prefill" :3,
+                          "slots":1
+                      },
+                      "3. Elective":{
+                          "type": "creditdemand",
+                          "description": "ANT, CRJ, ECO, GEG, INT, POL, PSY, SOC, SSE, or SWK",
+                          "credits": [3,3],
+                          "credit prefill" :3,
+                          "slots":1
+                      }
+                      }
+ 
+                  }, "C. Humantities": {
+                  "type": "section",
+                  "credits": [9,9],
+                  "slots":2,
+                 "credit prefill":3,
+                  "description": "Choose one course in each subcategory",
+                  "data": {
+                      "1. Elective":{
+                          "type": "creditdemand",
+                          "description": "PAG, ENG, WRI, or HUM",
+                          "credits": [3,3],
+                          "credit prefill" :3,
+                          "course":
+                          ["WRI 207/WICT",3],
+                          "slots":1
+                      },
+                      "2. Elective":{
+                          "type": "creditdemand",
+                          "description": "Modern Language (103 or above) or PHI",
+                          "credits": [3,3],
+                          "credit prefill" :3,
+                          "course":
+                          ["PHI 40 CDCT",3],
+                          "slots":1
+                      },
+                      "3. Elective":{
+                          "type": "creditdemand",
+                          "description": "PAG, ENG, WRI, HUM, Modern Language (103 or above),or PHI" ,
+                          "credits": [3,3],
+                          "credit prefill" :3,
+                          "slots":1
+                      }
+              }
+              
+              },
+              "D. Free Electives":{
+                  "type": "section",
+                  "credits": [9,9],
+                 "slots":2,
+                 "credit prefill":3,
+                  "description": "",
+                  "slots":3,
+                  "data":{
+                     "University courses":{
+                         "type": "creditdemand",
+                          "description": "Choose any university course that count toward graduation",
+                          "credits": [9,9],
+                          "credit prefill" :-1,
+                          "slots":3}
+                     }
+                  
+                 }
+              }
+ 
+      }
+ }
+       
+ 
