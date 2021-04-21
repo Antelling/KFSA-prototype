@@ -55,5 +55,9 @@
     "slots": 6,
     "credit prefill": 3,
     "credits": [9, 18]
+  },
+"General Education": {
+  "type": "include",
+  "name": "2208 Gen Eds"
   }
 }

@@ -1,0 +1,44 @@
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'advisement/new_advisement.css' %}">
+    <title>ooo edit</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<div id="wrapper" class="uneditable">
+
+    <div id="actions" class="ed-feat">
+        <h1 class="toggle-ico">Actions</h1>
+        <div class="flexrow">
+            <a href="{% url "add_advisement" advisement.advisee.pk %}" class="button">Create New Session</a>
+            <a href="{% url "new_edit" advisement.pk %}" class="button">Edit This Session</a>
+            <a href="{% url "adv_home" %}" class="button">Home</a>
+        </div>
+    </div>
+
+    <div id="info" class="ed-feat">
+        <h1 class="toggle-ico">Info</h1>
+        <div>
+            {% include "checksheets/components/student_info.html" %}
+        </div>
+    </div>
+
+    {% with uneditable=True %}
+        <div id="past" class="ed-feat">
+            <h1 class="toggle-ico">Past Records</h1>
+            <div class="scrollable">
+                {% include "checksheets/components/past_records.html" %}
+            </div>
+        </div>
+
+        {% include "checksheets/program.html" %}
+    {% endwith %}
+
+    {% include "checksheets/components/transcript_data.html" %}
+
+</div>
+
+<script>
+</script>
+<script src="{% static "advisement/new_advisement.js" %}"></script>

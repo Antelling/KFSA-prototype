@@ -45,7 +45,6 @@
                 <th>Name</th>
                 <th>Advisors</th>
                 <th></th>
-                <th></th>
             </tr>
             {% for pair in student_adv_pairs %}
                 <tr align = "center">
@@ -53,11 +52,10 @@
                     <td>{{ pair.2}}</td>
                     <td>
                         {% if pair.1 %}
-                            <a class="plain" href="{% url "view_advisement" pair.1.pk %}">view most recent advisement session</a>
+                            <a class="plain" href="{% url "new_view" pair.1.pk %}">View Transcript</a>
+                        {% else %}
+                            <a class="plain" href="{% url "add_advisement" pair.0.pk %}">Create Transcript</a>
                         {% endif %}
-                    </td>
-                    <td>
-                        <a class="plain" href="{% url "add_advisement" pair.0.pk %}">add new advisement session</a>
                     </td>
                 </tr>
             {% endfor %}

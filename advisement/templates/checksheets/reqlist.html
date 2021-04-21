@@ -1,0 +1,32 @@
+<div class="requirement reqlist">
+<h1 class="toggle-ico">{{ key }}</h1>
+<h2>{{req.description}}</h2>
+<table>
+    <tr>
+        <th>Course</th><th>CR</th><th>Grade</th>
+    </tr>
+    {%  for course in req.courses %}
+        <tr class="reqlistcourse">
+            <td><span class="course_num">
+                {% if course.0 %}
+                    {{ course.0 }}
+                {% else %}
+                    {% include "checksheets/components/course_num.html" %}
+                {% endif %}
+            </span>: <span class="course_name">{{ course.1 }}</span></td>
+            <td>
+                {% if course.2 != -1 %}
+                    {{ course.2 }}
+                {% else %}
+                    {% include "checksheets/components/credit_select.html" %}
+                {% endif %}
+            </td>
+            <td>
+                {% with course.0 as name %}
+                    {% include "checksheets/components/grade_select.html" %}
+                {% endwith %}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+</div>

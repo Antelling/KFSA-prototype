@@ -1,0 +1,53 @@
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'advisement/new_advisement.css' %}">
+    <title>ooo edit</title>
+
+    <script type="text/javascript" src="xxxhttps://livejs.com/live.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{% static 'advisement/advisement_test_cases.js' %}"></script>
+</head>
+
+<div id="wrapper">
+
+    <div id="actions" class="ed-feat">
+        <h1 class="toggle-ico">Actions</h1>
+        <div class="flexrow">
+            <span class="button" id="save">Save</span>
+            <a href="{% url "new_view" advisement.pk %}" class="button">Switch to View</a>
+            <a href="{% url "adv_home" %}" class="button">Home</a>
+        </div>
+    </div>
+
+    <div id="info" class="ed-feat">
+        <h1 class="toggle-ico">Info</h1>
+        <div>
+            {% include "checksheets/components/student_info.html" %}
+        </div>
+    </div>
+
+    <div id="notes" class="ed-feat">
+        <h1 class="toggle-ico">Notes</h1>
+        <div>
+            <textarea id="notepad"></textarea>
+        </div>
+    </div>
+
+    {% include "checksheets/program.html" %}
+
+
+    <div id="past" class="ed-feat">
+        <h1 class="toggle-ico">Past Records</h1>
+        <div class="scrollable">
+            {% include "checksheets/components/past_records.html" %}
+        </div>
+    </div>
+
+    {% include "checksheets/components/transcript_data.html" %}
+
+</div>
+
+<script>
+</script>
+<script>let csrf_token='{{ csrf_token }}'</script>
+<script src="{% static "advisement/new_advisement.js" %}"></script>

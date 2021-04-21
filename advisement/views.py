@@ -48,7 +48,7 @@ def add_advisement(request, advisee):
     new_advisement.save()
 
     #redirect to the edit view so reloading this page does not create duplicate records
-    edit_url = reverse(edit_advisement, args=(new_advisement.pk,))
+    edit_url = reverse(new_edit_advisement, args=(new_advisement.pk,))
     return HttpResponseRedirect(edit_url)
 
 
@@ -77,6 +77,28 @@ def view_advisement(request, advisement):
     return render(request, "advisement/advisement.html",
                   {'html': html, 'advisement': advisement, "editable": False, "record": past_advisements})
 
+def new_edit_advisement(request, advisement):
+    advisement = ChecksheetInstance.objects.get(pk=advisement)
+    if request.method == "POST":
+        payload = request.POST.get("payload")
+        payload = json.loads(payload)
+        advisement.data = json.dumps(payload['serialization'])
+        advisement.notes = payload['notes']
+        advisement.save()
+        return HttpResponse("save successful")
+    else:
+        past_advisements = ChecksheetInstance.objects.filter(advisee=advisement.advisee).exclude(id=advisement.id) \
+            .order_by('-created_at')
+        program = json.loads(advisement.template.data)
+        return render(request, "checksheets/editor.html", {"program": program, 'advisement': advisement, "editable": False,
+                                                            "record": past_advisements })
+
+def new_view_advisement(request, advisement):
+    advisement = ChecksheetInstance.objects.get(pk=advisement)
+    past_advisements = ChecksheetInstance.objects.filter(advisee=advisement.advisee).order_by('-created_at')
+    program = json.loads(advisement.template.data)
+    return render(request, "checksheets/view_record.html", {"program": program, 'advisement': advisement, "editable": False,
+                                                       "record": past_advisements })
 
 def checksheet_listing(request):
     checksheets = ChecksheetTemplate.objects.all()
@@ -91,7 +113,7 @@ def add_checksheet(request):
         form = AddChecksheet(request.POST)
         if form.is_valid():
             try:
-                html = render_program.render(json.loads(form.cleaned_data["data"]), form.cleaned_data["name"])
+                json.loads(form.cleaned_data["data"])
 
                 #make sure the name is unique
                 duplicates = ChecksheetTemplate.objects.filter(name=form.cleaned_data["name"]).delete()
@@ -100,7 +122,7 @@ def add_checksheet(request):
                 form.save()
 
                 #return the rendered HTML for the preview
-                return HttpResponse(html)
+                return HttpResponse("saved")
             except Exception as e:
                 return HttpResponse(str(e))
     else:
@@ -188,3 +210,8 @@ def delete_checksheet(request):
     else:
         checksheet.delete()
         return HttpResponseRedirect(reverse("list_checksheets"))
+
+def view_template(request, template):
+    template = ChecksheetTemplate.objects.get(pk=template)
+    program = json.loads(template.data)
+    return render(request, "checksheets/view_template.html", {"program": program, "template": template})

@@ -1,0 +1,93 @@
+{
+  "Major Courses": {
+    "type": "creditdemand",
+    "description": "",
+    "credits": [21, 21],
+    "prefill": 3,
+    "slots": 3
+  },
+  "Professional Skills Courses": {
+    "type": "creditdemand",
+    "description": "",
+    "credits": [9, 9],
+    "prefill": 3,
+    "slots": 3
+  },
+  "Culminating Experience": {
+    "description": "",
+    "type": "reqlist",
+    "courses": [
+      ["CSC 590", "Internship",  3],
+    ]
+  },
+  "Depth Area": {
+    "type": "section",
+    "description": "Satisfy at least one depth category by taking two courses from a category, one of which must be a 500 level.",
+    "data": {
+      "Compiler": {
+        "description": "",
+        "type": "reqlist",
+        "courses": [
+          ["CSC 425", "",  3],
+          ["CSC 526", "",  3]
+        ]
+      },
+
+      "AI": {
+        "description": "",
+        "type": "reqlist",
+        "courses": [
+          ["CSC 445", "", 3],
+          ["CSC 447", "",  3],
+          ["CSC 548", "",  3]
+        ]
+      },
+
+      "Database": {
+        "description": "",
+        "type": "reqlist",
+        "courses": [
+          ["CSC 456", "",  3],
+          ["CSC 556",  "", 3]
+        ]
+      },
+
+      "Web": {
+        "description": "",
+        "type": "reqlist",
+        "courses": [
+          ["CSC 421",  "", 3],
+          ["CSC 464",  "", 3],
+          ["CSC 521", "",  3]
+        ]
+      },
+
+      "OO/Functional Design and Develop": {
+        "description": "",
+        "type": "reqlist",
+        "courses": [
+          ["CSC 520", 3],
+          ["CSC 543", 3]
+        ]
+      },
+
+      "Operating Systems": {
+        "description": "",
+        "type": "reqlist",
+        "courses": [
+          ["CSC 543", 3],
+          ["CSC 552", 3]
+        ]
+      },
+
+      "Data Analytics": {
+        "description": "",
+        "type": "reqlist",
+        "courses": [
+          ["CSC 458", 3],
+          ["CSC 558", 3]
+        ]
+      }
+    }
+  }
+}

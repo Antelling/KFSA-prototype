@@ -1,0 +1,16 @@
+{% for key, req in program.items %}
+    {% if req.type == "reqlist" %}
+        {% include "checksheets/reqlist.html" %}
+
+    {% elif req.type == "creditdemand" %}
+        {% include "checksheets/creditdemand.html" %}
+
+    {% elif req.type == "section" %}
+        {% include "checksheets/section.html" %}
+
+    {% elif req.type == "include" %}
+
+    {% else %}
+        <h4>Error: unsupported requirement type "{{ req.type }}"</h4>
+    {% endif %}
+{% endfor %}

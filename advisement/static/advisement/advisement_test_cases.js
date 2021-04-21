@@ -1,0 +1,6 @@
+let tests = [
+    "[{\"req\":\"Web\",\"num\":\"CSC 421\",\"name\":\"\",\"grade\":\"B+\",\"grade_name\":\"CSC 421\",\"type\":\"reqlist\"}]",
+    "[{\"req\":\"Elective Courses\",\"num\":\"ABC 123\",\"name\":\"into to alphabet\",\"grade\":\"C+\",\"credit\":\"3\",\"type\":\"creditdemand\",\"row_num\":\"cd1\"},{\"req\":\"Elective Courses\",\"num\":\"PHY 892\",\"name\":\"advanced quantum dialysis\",\"grade\":\"B+\",\"credit\":\"4\",\"type\":\"creditdemand\",\"row_num\":\"cd2\"},{\"req\":\"Elective Courses\",\"num\":\"MAT 108\",\"name\":\"directed reading in mathematics\",\"grade\":\"A\",\"credit\":\"1\",\"type\":\"creditdemand\",\"row_num\":\"cd3\"}]",
+    "[{\"req\":\"Foundational Courses\",\"num\":\"CSC 425\",\"name\":\"Compiler Design I\",\"grade\":\"E\",\"grade_name\":\"CSC 425\",\"type\":\"reqlist\"},{\"req\":\"Foundational Courses\",\"num\":\"CSC 447\",\"name\":\"Artificial Intelligence I\",\"grade\":\"B\",\"grade_name\":\"CSC 447\",\"type\":\"reqlist\"},{\"req\":\"Compiler\",\"num\":\"CSC 425\",\"name\":\"\",\"grade\":\"A\",\"grade_name\":\"CSC 425\",\"type\":\"reqlist\"},{\"req\":\"AI\",\"num\":\"CSC 447\",\"name\":\"\",\"grade\":\"F\",\"grade_name\":\"CSC 447\",\"type\":\"reqlist\"}]",
+    "[{\"req\":\"Requirx\",\"num\":\"CSC 402\",\"name\":\"Data Structures II\",\"grade\":\"A\",\"grade_name\":\"CSC 402\",\"type\":\"reqlist\"}]"
+]
