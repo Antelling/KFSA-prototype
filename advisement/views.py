@@ -74,8 +74,9 @@ def new_view_advisement(request, advisement):
     past_advisements = ChecksheetInstance.objects.filter(advisee=advisement.advisee).order_by('-created_at')
     with open(advisement.template.data_file, "r") as data_file:
         program = json.loads(data_file.read())
+    url = advisement.advisee.get_absolute_url()
     return render(request, "checksheets/view_record.html", {"program": program, 'advisement': advisement, "editable": False,
-                                                       "record": past_advisements })
+                                                       "share_url": url, "record": past_advisements })
 
 def checksheet_listing(request):
     checksheets = ChecksheetTemplate.objects.all()
@@ -193,3 +194,21 @@ def view_template(request, template):
     with open(template.data_file, "r") as data_file:
         program = json.loads(data_file.read())
     return render(request, "checksheets/view_template.html", {"program": program, "template": template})
+
+from django.core.signing import BadSignature
+from django.http import Http404
+import urllib
+def viewtranscript(request, signed_pk):
+    try:
+        signature = urllib.parse.unquote_plus(signed_pk)
+        pk = int(Advisee.signer.unsign(signature))
+        advisee = Advisee.objects.get(pk=pk)
+        past_advisements = ChecksheetInstance.objects.filter(advisee=advisee).order_by('-created_at')
+        advisement = past_advisements[0]
+        with open(past_advisements.latest('pk').template.data_file, "r") as data_file:
+            program = json.loads(data_file.read())
+        return render(request, "checksheets/student_view_record.html",
+                      {"program": program, "editable": False, "advisement": advisement,
+                       "record": past_advisements})
+    except (BadSignature, Advisee.DoesNotExist):
+        raise Http404('No Order matches the given query.')

@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from accounts.models import Faculty
+from django.core.signing import Signer
+from django.urls import reverse
+import urllib
 
 class ChecksheetTemplate(models.Model):
     date = models.DateTimeField(auto_now=True)
@@ -16,6 +19,13 @@ class Advisee(models.Model):
     id_number = models.CharField(max_length=10)
     advisors = models.ManyToManyField(Faculty)
     checksheet = models.ForeignKey(ChecksheetTemplate, on_delete=models.PROTECT)
+    signer = Signer(sep='/', salt='advisement.Advisee')
+
+    def get_absolute_url(self):
+        signed_pk = self.signer.sign(self.pk)
+        url_sign = urllib.parse.quote_plus(signed_pk)
+        print("")
+        return reverse('viewtranscript', kwargs={'signed_pk': url_sign})
 
     def __str__(self):
         return "Advisee<" + self.name + ">"

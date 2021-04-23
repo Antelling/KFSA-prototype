@@ -8,16 +8,6 @@
 
 <div id="wrapper" class="uneditable">
 
-    <div id="actions" class="ed-feat">
-        <h1 class="toggle-ico">Actions</h1>
-        <div class="flexrow">
-            <a href="{% url "add_advisement" advisement.advisee.pk %}" class="button">Create New Session</a>
-            <a href="{% url "new_edit" advisement.pk %}" class="button">Edit This Session</a>
-            <a href="{% url "adv_home" %}" class="button">Home</a>
-            <a href="{{ share_url }}" class="button">Share Link</a>
-        </div>
-    </div>
-
     <div id="info" class="ed-feat">
         <h1 class="toggle-ico">Info</h1>
         <div>
