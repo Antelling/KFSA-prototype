@@ -1,1 +1,1 @@
-<input class="credit_input" type=number max="12" min="1" value="{{ req.prefill }}">
+<input class="credit_input" type=number max="12" min="1" value="{% if req.prefill %}{{req.prefill }}{% else %}3{% endif %}">

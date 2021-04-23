@@ -6,10 +6,10 @@ class ChecksheetTemplate(models.Model):
     date = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=200)
     description = models.TextField()
-    data = models.TextField()
+    data_file = models.TextField()
 
     def __str__(self):
-        return "<" + str(self.pk) + ", " + self.name + ">"
+        return self.name
 
 class Advisee(models.Model):
     name = models.CharField(max_length=200)

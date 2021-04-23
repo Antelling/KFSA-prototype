@@ -52,31 +52,6 @@ def add_advisement(request, advisee):
     return HttpResponseRedirect(edit_url)
 
 
-def edit_advisement(request, advisement):
-    advisement = ChecksheetInstance.objects.get(pk=advisement)
-    if request.method == "POST":
-        advisement.data = request.POST.get("serialization")
-        advisement.notes = request.POST.get("notes")
-        advisement.save()
-        return HttpResponse("save successful")
-    else:
-        # render a checksheet to html
-        past_advisements = ChecksheetInstance.objects.filter(advisee=advisement.advisee).exclude(id=advisement.id)\
-            .order_by('-created_at')
-        program = advisement.template.data
-        html = render_program.render(json.loads(program), advisement.template.name)
-        return render(request, "advisement/advisement.html", {'html': html, 'advisement': advisement, "editable": True, "record": past_advisements})
-
-
-def view_advisement(request, advisement):
-    advisement = ChecksheetInstance.objects.get(pk=advisement)
-    past_advisements = ChecksheetInstance.objects.filter(advisee=advisement.advisee).exclude(id=advisement.id) \
-        .order_by('-created_at')
-    program = advisement.template.data
-    html = render_program.render(json.loads(program), advisement.template.name)
-    return render(request, "advisement/advisement.html",
-                  {'html': html, 'advisement': advisement, "editable": False, "record": past_advisements})
-
 def new_edit_advisement(request, advisement):
     advisement = ChecksheetInstance.objects.get(pk=advisement)
     if request.method == "POST":
@@ -89,14 +64,16 @@ def new_edit_advisement(request, advisement):
     else:
         past_advisements = ChecksheetInstance.objects.filter(advisee=advisement.advisee).exclude(id=advisement.id) \
             .order_by('-created_at')
-        program = json.loads(advisement.template.data)
+        with open(advisement.template.data_file, "r") as data_file:
+            program = json.loads(data_file.read())
         return render(request, "checksheets/editor.html", {"program": program, 'advisement': advisement, "editable": False,
                                                             "record": past_advisements })
 
 def new_view_advisement(request, advisement):
     advisement = ChecksheetInstance.objects.get(pk=advisement)
     past_advisements = ChecksheetInstance.objects.filter(advisee=advisement.advisee).order_by('-created_at')
-    program = json.loads(advisement.template.data)
+    with open(advisement.template.data_file, "r") as data_file:
+        program = json.loads(data_file.read())
     return render(request, "checksheets/view_record.html", {"program": program, 'advisement': advisement, "editable": False,
                                                        "record": past_advisements })
 
@@ -213,5 +190,6 @@ def delete_checksheet(request):
 
 def view_template(request, template):
     template = ChecksheetTemplate.objects.get(pk=template)
-    program = json.loads(template.data)
+    with open(template.data_file, "r") as data_file:
+        program = json.loads(data_file.read())
     return render(request, "checksheets/view_template.html", {"program": program, "template": template})

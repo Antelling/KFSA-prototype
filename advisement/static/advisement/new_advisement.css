@@ -53,7 +53,6 @@ body {
     width: 100%;
 }
 td:nth-child(1) {
-    width: 360px;
     display: block;
 }
 td:nth-child(2), td:nth-child(3) {
@@ -66,7 +65,7 @@ td:nth-child(2), td:nth-child(3) {
     width: 100px;
 }
 .course_name {
-    width: 250px;
+    max-width: 250px;
 }
 .credit_input {
     width: 60px;

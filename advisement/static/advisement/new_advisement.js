@@ -11,9 +11,13 @@ function reqListCourse(index, target) {
         let courseNum = t.find(".course_num").text();
         let courseName = t.find(".course_name").text();
         let requirement = t.parent().parent().parent().find("h1").text();
+        let inputCourseNum = t.find(".course_num input").val();
+        let inputCredit = t.find(".credit_input").val();
         transcript.push({
             "req": requirement,
             "num": courseNum,
+            "inputCourseNum": inputCourseNum,
+            "inputCredit": inputCredit,
             "name": courseName,
             "grade": grade,
             "grade_name": grade_name,
@@ -47,6 +51,7 @@ function loadTranscript() {
     transcript = [];
     $(".reqlistcourse").each(reqListCourse);
     $(".creddemcourse").each(credDemCourse);
+    console.log(transcript);
     let notes = $("#notepad").val();
     let payload = JSON.stringify({serialization: transcript, notes: notes})
     $.post(
@@ -62,9 +67,13 @@ $("#save").click(loadTranscript);
 /* write information about a course to the notes textarea */
 function courseToNotes(course, error) {
     let ta = $("#notepad");
-    msg = `\nCourse Transfer Error: ${error}
-    \tcourse number: ${course.num}
-    \tcourse name: ${course.name}
+    msg = `\nCourse Transfer Error: ${error}\n`;
+    if (course.inputCourseNum) {
+        msg += `\tcourse number: ${course.inputCourseNum}\n`
+    } else {
+        msg += `\tcourse number: ${course.num}`
+    }
+    msg += `course name: ${course.name}
     \tpast requirement: ${course.req}
     \tgrade: ${course.grade}\n`
     ta.val(ta.val() + msg);
@@ -83,21 +92,27 @@ function unwantedCourse(course) {
 }
 function fillInCourse(course) {
     "use strict";
-    let requirement_listing = $("h1:contains('" + course.req + "')").parent()[0];
+    let requirement_listing = $($("h1:contains('" + course.req + "')").parent()[0]);
     if (!requirement_listing) {
         orphanCourse(course);
         return;
     }
     if (course.type === "reqlist") {
-        let grade_select = $(requirement_listing).find("select[name='" + course.grade_name + "']")[0];
-        if (!grade_select) {
+        let grade_select = $(requirement_listing.find("select[name='" + course.grade_name + "']")[0]);
+        if (!grade_select.length) {
             unwantedCourse(course);
             return;
         }
-        $(grade_select).val(course.grade);
+        grade_select.val(course.grade);
+        if (course.inputCourseNum) {
+            requirement_listing.find(".course_num input").val(course.inputCourseNum);
+        }
+        if (course.inputCredit) {
+            requirement_listing.find(".credit_input").val(course.inputCredit);
+        }
     } else if (course.type === "creditdemand") {
-        let row = $(requirement_listing).find("tr[name='" + course.row_num + "']")[0];
-        if (!row) {
+        let row = requirement_listing.find("tr[name='" + course.row_num + "']")[0];
+        if (!row.length) {
             overflowCourse(course);
             return;
         }

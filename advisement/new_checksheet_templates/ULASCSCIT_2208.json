@@ -4,40 +4,37 @@
     "data": {
       "Required Courses": {
         "type": "reqlist",
-        "description": "",
+        "description": "39 total credits",
         "courses": [
           ["CSC 125", "Discrete Math for CS II", 3],
-          ["CSC 225", "Discrete Math for CS I", 3],
           ["CSC 135", "Comp Sci I", 3],
-          ["CSC 136", "Comp Sci II", 3],
           ["CSC 150", "Ethical, Legal, and Professional Impacts of the Digital Age", 3],
-          ["CSC 235", "Comp Org & Assembly Language", 3],
-          ["CSC 237", "Data Structures", 3],
-          ["CSC 310", "Prog. Languages", 3],
-          ["CSC 328", "Network Programming", 3],
-          ["CSC 343", "Operating Systems", 3],
+          ["", "CSC 136: Comp Sci II OR CSC 220: OO Multimedia Prog OR CSC 223: Advanced Scientific Prog", 3],
+          ["CSC 242", "Web Programming", 3],
+          ["CSC 252", "Unix Scripting and Administration", 3],
+          ["CSC 253", "IT Systems", 3],
+          ["CSC 273", "Computing Systems Integration", 3],
+          ["CSC 311", "Computer Networks", 3],
+          ["CSC 341", "Information Security", 3],
+          ["CSC 356", "Introduction to Database Sys", 3],
           ["CSC 354", "Software Engineering I", 3],
           ["CSC 355", "Software Engineering II", 3]
         ]
       },
       "Elective Courses": {
         "type": "creditdemand",
-        "description": "0-9 credits of additional 200 level CSC courses, not previously used for above requirements, excluding CSC 280",
-        "credits": [0, 9],
+        "description": "18 credits of additional 200 level CSC courses, not previously used for above requirements, excluding CSC 280 and CSC 380",
+        "credits": [18, 18],
         "prefill": 3,
-        "slots": 3
-      },
-      "Additional Elective Courses": {
-        "type": "creditdemand",
-        "description": "9-18 credits of additional CSC courses, number 300 or above and not previously used for above requirements, excluding any course numbered CSC 87X and CSC 380.",
-        "slots": 6,
-        "prefill": 3,
-        "credits": [9, 18]
+        "slots": 6
       }
     }
   },
+
+
   "General Education Requirements": {
     "type": "section",
+    "description": "",
     "data": {
       "First Year Seminar": {
         "type": "creditdemand",
@@ -76,6 +73,7 @@
       }
     }
   },
+
   "Other Requirements": {
     "type": "section",
     "data": {
@@ -83,18 +81,14 @@
         "type": "reqlist",
         "description": "",
         "courses": [
-          ["MAT 260", "Linear Algebra", 3],
-          ["","natural science course with lab component", -1]
+          ["","MAT 105 (College Algebra) or higher", -1]
         ]
       },
       "Directed General Education": {
         "type": "reqlist",
-        "description": "The following courses are required to fulfill the computer science requirements and are suffested to satisfy general education.",
+        "description": "The following courses are required to fulfill the computer science requirements and are suggested to satisfy general education.",
         "courses": [
-          ["PHI 40", "Intro to Ethics(B)", 3],
-          ["MAT 181", "Calculus(C. 2)", 4],
-          ["MAT 140 OR MAT 301", "(Students minoring in math should take MAT 301) Applied Stat Methods(C. 3)", 3],
-          ["","Natural Science Course for a Science Major(C. 1)", -1]
+          ["MAT 140", "Applied Statistics (C. 2)", 3]
         ]
       },
       "Free Electives": {
