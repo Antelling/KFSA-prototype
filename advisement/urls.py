@@ -25,8 +25,8 @@ urlpatterns = [
     path('edit_faculty/<int:faculty>', views.edit_faculty, name="edit_faculty"),
 
     #testing urls
-    path('new_edit_session/<int:advisement>', views.new_edit_advisement, name="new_edit"),
-    path('new_view_session/<int:advisement>', views.new_view_advisement, name="new_view"),
+    path('new_edit_session/<int:advisement>', views.edit_advisement, name="new_edit"),
+    path('new_view_session/<int:advisement>', views.view_advisement, name="new_view"),
 
     path('viewtranscript/<str:signed_pk>', views.viewtranscript, name="viewtranscript"),
 ]

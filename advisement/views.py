@@ -1,17 +1,19 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from .models import ChecksheetInstance, Advisee, ChecksheetTemplate
 from accounts.models import Faculty
-from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 import os, json
-from . import render_program
 from .forms import AddChecksheet, AddAdvisee
 from accounts.forms import PermissionSelect
-
+from django.core.signing import BadSignature
+from django.http import Http404
+import urllib
 
 """homepage of the advisement system. Kind of dumb since advisement is the only system. """
+@login_required
 def home(request):
     try:
         faculty = Faculty.objects.get(user=request.user)
@@ -30,10 +32,19 @@ def home(request):
     return render(request, 'advisement/adv_home.html', {'student_adv_pairs': zipped, 'faculty': faculty})
 
 
-
+"""Create a new advisment record"""
+@login_required
 def add_advisement(request, advisee):
     advisee = Advisee.objects.get(pk=advisee)
     faculty = Faculty.objects.get(user=request.user)
+
+    #check that user is an advisor
+    if not faculty.can_advise:
+        return HttpResponse("You are not an advisor.")
+
+    #check that this advisee lists the faculty as an advisor
+    if not faculty in advisee.advisors:
+        return HttpResponse("You are not an advisor of this student.")
 
     #check if there is already an advisement record for this user
     try:
@@ -47,13 +58,25 @@ def add_advisement(request, advisee):
                                         data=data)
     new_advisement.save()
 
-    #redirect to the edit view so reloading this page does not create duplicate records
-    edit_url = reverse(new_edit_advisement, args=(new_advisement.pk,))
+    #redirect to the edit view
+    edit_url = reverse(edit_advisement, args=(new_advisement.pk,))
     return HttpResponseRedirect(edit_url)
 
-
-def new_edit_advisement(request, advisement):
+"""Edit an advisement record"""
+@login_required
+def edit_advisement(request, advisement):
     advisement = ChecksheetInstance.objects.get(pk=advisement)
+
+    #security checks
+    advisee = advisement.advisee
+    faculty = Faculty.objects.get(user=request.user)
+    #check that user is an advisor
+    if not faculty.can_advise:
+        return HttpResponse("You are not an advisor.")
+    #check that this advisee lists the faculty as an advisor
+    if not faculty in advisee.advisors:
+        return HttpResponse("You are not an advisor of this student.")
+
     if request.method == "POST":
         payload = request.POST.get("payload")
         payload = json.loads(payload)
@@ -68,9 +91,22 @@ def new_edit_advisement(request, advisement):
             program = json.loads(data_file.read())
         return render(request, "checksheets/editor.html", {"program": program, 'advisement': advisement, "editable": False,
                                                             "record": past_advisements })
-
-def new_view_advisement(request, advisement):
+"""View an advisement record.
+Only available to advisors of the record's advisee."""
+@login_required
+def view_advisement(request, advisement):
     advisement = ChecksheetInstance.objects.get(pk=advisement)
+
+    #security checks
+    advisee = advisement.advisee
+    faculty = Faculty.objects.get(user=request.user)
+    #check that user is an advisor
+    if not faculty.can_advise:
+        return HttpResponse("You are not an advisor.")
+    #check that this advisee lists the faculty as an advisor
+    if not faculty in advisee.advisors:
+        return HttpResponse("You are not an advisor of this student.")
+
     past_advisements = ChecksheetInstance.objects.filter(advisee=advisement.advisee).order_by('-created_at')
     with open(advisement.template.data_file, "r") as data_file:
         program = json.loads(data_file.read())
@@ -78,6 +114,9 @@ def new_view_advisement(request, advisement):
     return render(request, "checksheets/view_record.html", {"program": program, 'advisement': advisement, "editable": False,
                                                        "share_url": url, "record": past_advisements })
 
+"""List all the checksheets in the system, and determine wether or not any advisees list the checksheet as their 
+program."""
+@login_required
 def checksheet_listing(request):
     checksheets = ChecksheetTemplate.objects.all()
     for checksheet in checksheets:
@@ -86,7 +125,15 @@ def checksheet_listing(request):
             checksheet.used = True
     return render(request, "advisement/checksheet_listing.html", {"checksheets": checksheets})
 
+"""Add a new checksheet to the system."""
+@login_required
 def add_checksheet(request):
+
+    #security check
+    faculty = Faculty.objects.get(user=request.user)
+    if not faculty.can_upload_checksheets:
+        return HttpResponse("You do not have permission to upload checksheets.")
+
     if request.method == "POST":
         form = AddChecksheet(request.POST)
         if form.is_valid():
@@ -94,7 +141,7 @@ def add_checksheet(request):
                 json.loads(form.cleaned_data["data"])
 
                 #make sure the name is unique
-                duplicates = ChecksheetTemplate.objects.filter(name=form.cleaned_data["name"]).delete()
+                ChecksheetTemplate.objects.filter(name=form.cleaned_data["name"]).delete()
 
                 #save the new template
                 form.save()
@@ -108,7 +155,14 @@ def add_checksheet(request):
         return render(request, "advisement/upload_checksheet.html", {"checksheet": form})
 
 
+
+"""Add a new advisee to the system."""
+@login_required
 def add_students(request):
+    faculty = Faculty.objects.get(user=request.user)
+    if not faculty.can_add_students:
+        return HttpResponse("You do not have permission to add students.")
+
     if request.method == "POST":
         form = AddAdvisee(request.POST)
         if form.is_valid():
@@ -119,7 +173,13 @@ def add_students(request):
         return render(request, "advisement/add_advisee.html", {"form": form})
 
 
+"""List all of the students in the system.
+Used to manage student records."""
+@login_required
 def advisee_list(request):
+    faculty = Faculty.objects.get(user=request.user)
+    if not faculty.can_manage_students:
+        return HttpResponse("You do not have permission to manage students.")
     advisees = Advisee.objects.all()
     zipped = []
     for advisee in advisees:
@@ -131,7 +191,11 @@ def advisee_list(request):
     return render(request, "advisement/list_advisees.html", {'advisee_pairs': zipped})
 
 
+"""Edit an advisee record."""
 def edit_advisee(request, advisee):
+    faculty = Faculty.objects.get(user=request.user)
+    if not faculty.can_manage_students:
+        return HttpResponse("You do not have permission to manage students.")
     student = Advisee.objects.get(pk=advisee)
     if request.method == "POST":
         form = AddAdvisee(request.POST)
@@ -148,16 +212,25 @@ def edit_advisee(request, advisee):
                                    'advisors':student.advisors.all,
                                    'checksheet':student.checksheet
                                    })
-        # form = AddAdvisee()
         return render(request, "advisement/edit_advisee.html", {"form": form})
 
 
+"""List all faculty in the system."""
+@login_required
 def faculty_list(request):
+    faculty = Faculty.objects.get(user=request.user)
+    if not faculty.can_manage_faculty:
+        return HttpResponse("You do not have permission to manage faculty.")
     advisors = Faculty.objects.all()
     return render(request, "advisement/list_faculty.html", {'advisors': advisors})
 
 
+"""Edit a faculty record"""
+@login_required
 def edit_faculty(request, faculty):
+    user = Faculty.objects.get(user=request.user)
+    if not user.can_manage_faculty:
+        return HttpResponse("You do not have permission to manage faculty.")
     advisor = Faculty.objects.get(pk=faculty)
     if request.method == "POST":
         advisor.can_advise = request.POST.get("can_advise")=="on"
@@ -178,26 +251,41 @@ def edit_faculty(request, faculty):
                                          })
         return render(request, "advisement/edit_faculty.html", {"form": form})
 
+"""delete a checksheet.
+Only possible if checksheets do not have any students.
+Checksheet parameter passed in via POST.
+Called from form submission in list checksheets template."""
 def delete_checksheet(request):
+    #security check
+    faculty = Faculty.objects.get(user=request.user)
+    if not faculty.can_upload_checksheets:
+        return HttpResponse("You do not have permission to manage programs.")
+
     name = request.POST.get("name")
     checksheet = ChecksheetTemplate.objects.get(name=name)
+
+    #constraint check
     students = Advisee.objects.filter(checksheet=checksheet)
-    hmm = len(students.all())
     if len(students.all()) > 0:
         return HttpResponse("cannot delete this checksheet, it has students using it. ")
     else:
+        #delete and return to list checksheets
         checksheet.delete()
         return HttpResponseRedirect(reverse("list_checksheets"))
 
+
+"""View a rendered program by itself, with no additional UI. Not linked to by anywhere in the app, but 
+acessible via direct URL. Useful for checking that new program definitions have a correct and appealing rendered 
+appearance."""
+@login_required
 def view_template(request, template):
     template = ChecksheetTemplate.objects.get(pk=template)
     with open(template.data_file, "r") as data_file:
         program = json.loads(data_file.read())
     return render(request, "checksheets/view_template.html", {"program": program, "template": template})
 
-from django.core.signing import BadSignature
-from django.http import Http404
-import urllib
+"""View a students transcript, accessed through the student's secret link. 
+No login is required, so students can view their own transcript, once an advisor has shared the student's link. """
 def viewtranscript(request, signed_pk):
     try:
         signature = urllib.parse.unquote_plus(signed_pk)
