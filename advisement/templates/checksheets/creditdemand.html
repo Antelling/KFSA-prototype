@@ -1,0 +1,24 @@
+<div class="requirement creditdemand">
+<h1 class="toggle-ico">{{ key }}</h1>
+<h2>{{ req.description }}</h2>
+<table>
+    <tr>
+        <th>Course</th><th>CR</th><th>Grade</th>
+    </tr>
+    {% with ''|center:req.slots as range %}{% for _ in range %}
+        <tr class="creddemcourse" name="cd{{ forloop.counter }}">
+            <td>
+                {% include "checksheets/components/course_num.html" %}
+                <input class="course_name" type="text" placeholder="course name">
+            </td>
+            <td>{% include "checksheets/components/credit_select.html" %}</td>
+            <td>
+                {% with name=forloop.counter name2=key %}
+                    {% include "checksheets/components/grade_select.html" %}
+                {% endwith %}
+            </td>
+        </tr>
+    {% endfor %}{% endwith %}
+</table>
+<p>Total Credits: {{ req.credits }}</p>
+</div>

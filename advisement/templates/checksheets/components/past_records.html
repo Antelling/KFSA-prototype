@@ -1,0 +1,18 @@
+{% for r in record %}
+    <div class="record {% if forloop.counter == 1 %}first{% endif %}">
+        <h3 class="toggle-ico">{{ r.created_at }} {% if forloop.counter == 1 and uneditable %}| Most Recent Session{% endif %}
+        {% if r.pk == advisement.pk and uneditable %}| Currently Viewed Session{% endif %}
+        </h3>
+        <div>
+            <p>Last updated {{ r.updated_at}}</p>
+            {% if r.notes %}
+                <p class="notes">{{ r.notes }}</p>
+            {% else %}
+                <p class="empty">No notes recorded for this session.</p>
+            {% endif %}
+            {% if r.pk != advisement.pk %}
+                <a class="button" target="_blank" class="plain" href="{% url "new_view" r.pk %}">View</a>
+            {% endif %}
+        </div>
+    </div>
+{% endfor %}

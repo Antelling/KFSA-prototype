@@ -1,0 +1,11 @@
+<p><b>Name: </b>{{ advisement.advisee.name }}</p>
+<p><b>ID:</b> {{ advisement.advisee.id_number }}</p>
+<p><b>Program:</b> {{ advisement.template.name }}</p>
+<p><b>Session created:</b> {{ advisement.created_at }}</p>
+<p><b>Session updated:</b> {{ advisement.updated_at}}</p>
+<p><b>Advisors:</b> <ul>{% for advisor in advisement.advisee.advisors.all %}
+    <li>{{ advisor.user.username }}</li>
+{% endfor %}</ul></p>
+
+<p><b>This session's advisor:</b> <ul><li>{{ advisement.advisor.user.username }}</li></ul></p>
+

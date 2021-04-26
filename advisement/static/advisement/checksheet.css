@@ -288,11 +288,19 @@ h1 {
 }
 
 @media print {
-    *{color: red !important }
-    .narrow{ display: none }
-    /*.wrapper select{ display: none }*/
-    p.bodyText {font-family:georgia, times, serif;}
+    * {
+        color: red !important
+    }
 
+    .narrow {
+        display: none
+    }
+
+    /*.wrapper select{ display: none }*/
+    p.bodyText {
+        font-family: georgia, times, serif;
+    }
+}
 
 @media screen, print {
 	p.bodyText {font-size:12pt}

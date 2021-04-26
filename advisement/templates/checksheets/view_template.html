@@ -1,0 +1,14 @@
+{% load static %}
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'advisement/new_advisement.css' %}">
+    <title>{{ template.name }}</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<div id="wrapper">
+    {% include "checksheets/program.html" %}
+</div>
+</body>
+</html>

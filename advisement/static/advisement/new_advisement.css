@@ -1,0 +1,150 @@
+body {
+    margin: 0;
+    font-family: Helvetica, Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+
+/* blocks are arranged in columns from left to right with flexbox */
+#wrapper {
+    border: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-flow: column wrap;
+    height: 100%;
+    align-content: flex-start;
+}
+
+/* make blocks for requirements or other sections */
+.requirement, .section, .ed-feat, .record{
+    border: 1px solid #D57800;
+    max-width: 500px;
+    margin: 7px;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+
+/* make block title bars */
+.requirement > h1, .section > h1, .ed-feat > h1, .record > h3{
+    border-radius: 10px 10px 0 0;
+    background: #F1C382;
+    margin: 0;
+    padding: 5px;
+    padding-bottom: 0;
+    font-weight: 800;
+}
+.requirement > h2, .section > p {
+    background: #F1C382;
+    margin: 0;
+    padding: 5px;
+    padding-top: 0;
+    font-weight: 400;
+    font-size: 18px;
+}
+/* editor features get darker title */
+.ed-feat > h1, .first h3 {
+    background-color: #FF9E19;
+}
+
+/* give table rows width and set text align */
+.requirement > table {
+    width: 100%;
+}
+td:nth-child(1) {
+    display: block;
+}
+td:nth-child(2), td:nth-child(3) {
+    text-align: center;
+}
+
+
+/* credit demand input layout */
+.course_num {
+    width: 100px;
+}
+.course_name {
+    max-width: 250px;
+}
+.credit_input {
+    width: 60px;
+}
+
+/* rules for the collapse toggle */
+.toggle-ico {
+    cursor: pointer;
+}
+.toggle-ico:hover {
+    background-color: #FF9E19 !important;
+}
+.hidden {
+    border-bottom: 3px solid #D57800 !important;
+}
+.hidden > .contents, .hidden > table, .hidden > div{
+    display: none;
+}
+
+/* notes entry block */
+#notes {
+    width: 500px;
+}
+#notes textarea {
+    min-width: 500px;
+    border-radius: 0 0 10px 10px;
+    max-width: 100%;
+    padding: 20px;
+    line-height: 22px;
+    font-size: 18px;
+    border: none;
+    font-family: arial;
+}
+
+/* make custom button class */
+.button {
+    margin: 10px;
+    padding: 10px;
+    display: inline-block;
+    border-radius: 10px;
+    background: #F1C382;
+    color: inherit;
+    text-decoration: inherit;
+}
+.button:hover {
+    background-color: #FF9E19;
+    cursor: pointer;
+}
+.button:active{
+    background-color: #D57800;
+    cursor: pointer;
+}
+
+/*container for buttons*/
+.flexrow {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+}
+
+#info p, .record p {
+    padding: 5px;
+    margin: 0 5px 0 5px;
+}
+.empty {
+    color: grey;
+}
+
+.uneditable select {
+    -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+    background: white;
+    color: black;
+    border: none;
+}
+
+.uneditable input {
+    pointer-events: none;
+    border: 1px solid black;
+    padding: 5px;
+}

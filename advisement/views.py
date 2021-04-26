@@ -48,35 +48,35 @@ def add_advisement(request, advisee):
     new_advisement.save()
 
     #redirect to the edit view so reloading this page does not create duplicate records
-    edit_url = reverse(edit_advisement, args=(new_advisement.pk,))
+    edit_url = reverse(new_edit_advisement, args=(new_advisement.pk,))
     return HttpResponseRedirect(edit_url)
 
 
-def edit_advisement(request, advisement):
+def new_edit_advisement(request, advisement):
     advisement = ChecksheetInstance.objects.get(pk=advisement)
     if request.method == "POST":
-        advisement.data = request.POST.get("serialization")
-        advisement.notes = request.POST.get("notes")
+        payload = request.POST.get("payload")
+        payload = json.loads(payload)
+        advisement.data = json.dumps(payload['serialization'])
+        advisement.notes = payload['notes']
         advisement.save()
         return HttpResponse("save successful")
     else:
-        # render a checksheet to html
-        past_advisements = ChecksheetInstance.objects.filter(advisee=advisement.advisee).exclude(id=advisement.id)\
+        past_advisements = ChecksheetInstance.objects.filter(advisee=advisement.advisee).exclude(id=advisement.id) \
             .order_by('-created_at')
-        program = advisement.template.data
-        html = render_program.render(json.loads(program), advisement.template.name)
-        return render(request, "advisement/advisement.html", {'html': html, 'advisement': advisement, "editable": True, "record": past_advisements})
+        with open(advisement.template.data_file, "r") as data_file:
+            program = json.loads(data_file.read())
+        return render(request, "checksheets/editor.html", {"program": program, 'advisement': advisement, "editable": False,
+                                                            "record": past_advisements })
 
-
-def view_advisement(request, advisement):
+def new_view_advisement(request, advisement):
     advisement = ChecksheetInstance.objects.get(pk=advisement)
-    past_advisements = ChecksheetInstance.objects.filter(advisee=advisement.advisee).exclude(id=advisement.id) \
-        .order_by('-created_at')
-    program = advisement.template.data
-    html = render_program.render(json.loads(program), advisement.template.name)
-    return render(request, "advisement/advisement.html",
-                  {'html': html, 'advisement': advisement, "editable": False, "record": past_advisements})
-
+    past_advisements = ChecksheetInstance.objects.filter(advisee=advisement.advisee).order_by('-created_at')
+    with open(advisement.template.data_file, "r") as data_file:
+        program = json.loads(data_file.read())
+    url = advisement.advisee.get_absolute_url()
+    return render(request, "checksheets/view_record.html", {"program": program, 'advisement': advisement, "editable": False,
+                                                       "share_url": url, "record": past_advisements })
 
 def checksheet_listing(request):
     checksheets = ChecksheetTemplate.objects.all()
@@ -91,7 +91,7 @@ def add_checksheet(request):
         form = AddChecksheet(request.POST)
         if form.is_valid():
             try:
-                html = render_program.render(json.loads(form.cleaned_data["data"]), form.cleaned_data["name"])
+                json.loads(form.cleaned_data["data"])
 
                 #make sure the name is unique
                 duplicates = ChecksheetTemplate.objects.filter(name=form.cleaned_data["name"]).delete()
@@ -100,7 +100,7 @@ def add_checksheet(request):
                 form.save()
 
                 #return the rendered HTML for the preview
-                return HttpResponse(html)
+                return HttpResponse("saved")
             except Exception as e:
                 return HttpResponse(str(e))
     else:
@@ -188,3 +188,27 @@ def delete_checksheet(request):
     else:
         checksheet.delete()
         return HttpResponseRedirect(reverse("list_checksheets"))
+
+def view_template(request, template):
+    template = ChecksheetTemplate.objects.get(pk=template)
+    with open(template.data_file, "r") as data_file:
+        program = json.loads(data_file.read())
+    return render(request, "checksheets/view_template.html", {"program": program, "template": template})
+
+from django.core.signing import BadSignature
+from django.http import Http404
+import urllib
+def viewtranscript(request, signed_pk):
+    try:
+        signature = urllib.parse.unquote_plus(signed_pk)
+        pk = int(Advisee.signer.unsign(signature))
+        advisee = Advisee.objects.get(pk=pk)
+        past_advisements = ChecksheetInstance.objects.filter(advisee=advisee).order_by('-created_at')
+        advisement = past_advisements[0]
+        with open(past_advisements.latest('pk').template.data_file, "r") as data_file:
+            program = json.loads(data_file.read())
+        return render(request, "checksheets/student_view_record.html",
+                      {"program": program, "editable": False, "advisement": advisement,
+                       "record": past_advisements})
+    except (BadSignature, Advisee.DoesNotExist):
+        raise Http404('No Order matches the given query.')

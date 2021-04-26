@@ -1,0 +1,9 @@
+<div class="section">
+    <h1 class="toggle-ico section-header">{{ key }}</h1>
+    <p>{{ req.description }}</p>
+    <div class="contents scrollable">
+        {% with req.data as program %}
+            {% include "checksheets/program.html" %}
+        {% endwith %}
+    </div>
+</div>

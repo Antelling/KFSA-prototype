@@ -1,0 +1,103 @@
+{
+  "Required": {
+    "type": "reqlist",
+    "courses": [["CSC 441", "Advanced Information Security", 3]],
+    "description": "3 credits"
+  },
+  "Foundational Courses": {
+    "type": "reqlist",
+    "courses": [
+      ["CSC 411", "Networking I", 3],
+      ["CSC 421", "Web-Based Design and Develop", 3],
+      ["CSC 456", "Database Mgmt Systems I", 3],
+      ["CSC 458", "Data Mining & Predictive Anal. I", 3],
+      ["CSC 459", "Introduction to Big Data", 3],
+      ["CSC 464", "Human Computer Interaction", 3],
+      ["CSC 510", "Advanced Operating Systems", 3],
+      ["CSC 512", "Networking II", 3],
+      ["CSC 521", "Adv Web-Based Sofware Devel.", 3],
+      ["CSC 552", "Advanced Unix Programming", 3],
+      ["CSC 554", "Project Management", 3],
+      ["CSC 555", "Applied Cryptography", 3],
+      ["CSC 556", "Database Mgmt Systems II", 3],
+      ["CSC 558", "Data Mining & Predictive Anal. II", 3]
+    ],
+    "description": ""
+  },
+  "Optional Thesis": {
+    "description": "0 or 6 credits",
+    "type": "reqlist",
+    "courses": [
+      ["CSC 599", "Thesis", 6]
+    ]
+  },
+  "Elective Courses": {
+    "type": "creditdemand",
+    "description": "0-9 credits",
+    "credits": [0, 9],
+    "prefill": 3,
+    "slots": 3,
+    "crits": "free electives"
+  },
+  "Depth Area": {
+    "type": "section",
+    "description": "Satisfy at least one depth category by taking two courses from a category, one of which must be a 500 level.",
+    "data": {
+      "Database": {
+        "description": "",
+        "type": "reqlist",
+        "courses": [
+          ["CSC 456", "",  3],
+          ["CSC 556",  "", 3]
+        ]
+      },
+
+      "Web": {
+        "description": "",
+        "type": "reqlist",
+        "courses": [
+          ["CSC 421",  "", 3],
+          ["CSC 464",  "", 3],
+          ["CSC 521", "",  3]
+        ]
+      },
+
+      "Networking": {
+        "description": "",
+        "type": "reqlist",
+        "courses": [
+          ["CSC 411",  "", 3],
+          ["CSC 512",  "", 3]
+        ]
+      },
+
+
+      "IT Systems & Management": {
+        "description": "",
+        "type": "reqlist",
+        "courses": [
+          ["CSC 510",  "", 3],
+          ["CSC 554",  "", 3]
+        ]
+      },
+
+      "Security": {
+        "description": "",
+        "type": "reqlist",
+        "courses": [
+          ["CSC 441",  "", 3],
+          ["CSC 555",  "", 3]
+        ]
+      },
+
+      "Data Analytics": {
+        "description": "",
+        "type": "reqlist",
+        "courses": [
+          ["CSC 458", 3],
+          ["CSC 558", 3]
+        ]
+      }
+    }
+  }
+}

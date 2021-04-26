@@ -1,0 +1,63 @@
+[
+  {
+    "model": "advisement.ChecksheetTemplate",
+    "pk": 101,
+    "fields": {
+
+      "name": "M.S. Computer Science : Software Development (#2188)",
+      "description": "Active MS CSC checksheet, created 8/27/2018",
+      "date": "2021-01-01T00:00:00.0000Z",
+      "data_file": "advisement/new_checksheet_templates/GLASCSC_2188.json"
+    }
+  },
+  {
+    "model": "advisement.ChecksheetTemplate",
+    "pk": 102,
+    "fields": {
+      "name": "M.S. Computer Science : Software Development (#2158)",
+      "description": "MS CSC checksheet, created 8/24/2015",
+      "data_file": "advisement/new_checksheet_templates/GLASCSC_2158.json",
+      "date": "2021-01-01T00:00:00.0000Z"
+    }
+  },
+  {
+    "model": "advisement.ChecksheetTemplate",
+    "pk": 103,
+    "fields": {
+      "name": "M.S. Computer Science : Professional Science (#2188)",
+      "description": "MS CSC checksheet, created 8/27/2018",
+      "data_file": "advisement/new_checksheet_templates/GLASCSCPSM_2188.json",
+      "date": "2021-01-01T00:00:00.0000Z"
+    }
+  },
+  {
+    "model": "advisement.ChecksheetTemplate",
+    "pk": 104,
+    "fields": {
+      "name": "M.S. Computer Science : Information Technology (#2188)",
+      "description": "MS CSC checksheet, created 8/27/2018",
+      "data_file": "advisement/new_checksheet_templates/GLASCSCIT_2188.json",
+      "date": "2021-01-01T00:00:00.0000Z"
+    }
+  },
+  {
+    "model": "advisement.ChecksheetTemplate",
+    "pk": 105,
+    "fields": {
+      "name": "B.S. Computer Science (#2208)",
+      "description": "VS CSC checksheet, created 8/24/2020",
+      "data_file": "advisement/new_checksheet_templates/ULASCSCSD_2208.json",
+      "date": "2021-01-01T00:00:00.0000Z"
+    }
+  },
+  {
+    "model": "advisement.ChecksheetTemplate",
+    "pk": 106,
+    "fields": {
+      "name": "B.S. Information Technology (#2208)",
+      "description": "BS IT checksheet, created 8/24/2020",
+      "data_file": "advisement/new_checksheet_templates/ULASCSCIT_2208.json",
+      "date": "2021-01-01T00:00:00.0000Z"
+    }
+  }
+]

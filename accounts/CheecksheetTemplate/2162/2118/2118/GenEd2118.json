@@ -29,14 +29,14 @@
                      "description": "MAT 17 or above",
                      "course": ["MAT 140",3],
                      "slots":1
-                 }
+                 },
              "D. Wellness" :
                  {
                      "type": "creditdemand",
                      "credits": [3,3],
                      "credit prefill" :3,
                      "description": "Any 3-credit HEA course",
-                     "slots":1"
+                     "slots":1
                  }
              }
         },
@@ -238,4 +238,3 @@
             }
          }
  }
- 
