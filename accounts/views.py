@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.urls import reverse
 
@@ -15,6 +16,11 @@ class ChangePassWordView(PasswordChangeView):
     success_url= reverse_lazy('password_success')
    # template_name= 'registration/changePassword.html'
 
+
+def password_success(request):
+    return render(request, 'registration/password_success.html',{})
+
+
 class SignUpView(generic.CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('accounts_login')
@@ -25,7 +31,11 @@ class AddStudentView(generic.CreateView):
     form_class = AddStudentForm
     success_url = reverse_lazy('../')
     template_name = 'registration/add_student.html'
-    
+
+"""Set the self-reported permission of the current account.
+Huge security problem, since anyone can create an account at any time.
+New accounts should have no permissions."""
+@login_required
 def set_permissions(request):
     if request.method == "POST":
         form = PermissionSelect(request.POST)
@@ -36,6 +46,3 @@ def set_permissions(request):
     else:
         form = PermissionSelect()
         return render(request, 'registration/set_perm.html', {'form': form})
-
-def password_success(request):
-    return render(request, 'registration/password_success.html',{})
