@@ -140,3 +140,35 @@ $(function() {
 $(".uneditable").find("select").prop("disabled", true);
 
 
+function reqlist_total_credits(index, rl) {
+    rl = $(rl);
+    let title = rl.find("h1").text()
+    let vals = rl.find("select").map((i, e) => e.value).get()
+    let credit_amounts = rl.find(".cred-amount").map((i, x) => parseInt($(x).val()))
+    let rows_completed = vals.map(v => ["A", "A-", "B+", "B", "B-", "C+", "C", "D", "P"].includes(v))
+    let n_filled_in_reqs = rows_completed.filter(v => v).length
+    let n_asked_for_reqs = rl.find("select").length
+
+    //sum up amount of completed credits
+    let n_completed_credits = 0
+    for (let i = 0; i < credit_amounts.length; i++) {
+        if (rows_completed[i]) {
+            n_completed_credits += credit_amounts[i]
+        }
+    }
+
+    rl.find(".filled_in_credits").text(n_completed_credits)
+    rl.find(".asked_for_reqs").text(n_asked_for_reqs)
+    rl.find(".filled_in_reqs").text(n_filled_in_reqs)
+}
+
+$("select, .credit_input").change(function (){
+    let req = $(this).closest(".requirement")[0]
+    reqlist_total_credits(0, req)
+})
+
+function go() {
+    $(".requirement").map(reqlist_total_credits)
+}
+
+go()

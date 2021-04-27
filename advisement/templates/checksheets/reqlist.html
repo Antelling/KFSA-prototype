@@ -11,12 +11,12 @@
                 <td><span class="course_num">
                     {{ course.0 }}
                 </span>: <span class="course_name">{{ course.1 }}</span></td>
-                <td>
+                <td class="cred-amount">
                     {{ course.2 }}
                 </td>
             {% else %}
                 <td>
-                    <span class="course_num">{% include "checksheets/components/course_num.html" %}</span>:
+                    <span class="course_num cred-amount">{% include "checksheets/components/course_num.html" %}</span>:
                     <span class="course_name">{{ course.1 }}</span></td>
                 <td>
                     {% if course.2 != -1 %}
@@ -34,4 +34,5 @@
         </tr>
     {% endfor %}
 </table>
+<p>Filled in requirements: <span class="filled_in_reqs"></span> / <span class="asked_for_reqs"></span></p>
 </div>
