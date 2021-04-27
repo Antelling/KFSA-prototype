@@ -43,7 +43,7 @@ def add_advisement(request, advisee):
         return HttpResponse("You are not an advisor.")
 
     #check that this advisee lists the faculty as an advisor
-    if not faculty in advisee.advisors:
+    if not faculty in advisee.advisors.all():
         return HttpResponse("You are not an advisor of this student.")
 
     #check if there is already an advisement record for this user
@@ -74,7 +74,7 @@ def edit_advisement(request, advisement):
     if not faculty.can_advise:
         return HttpResponse("You are not an advisor.")
     #check that this advisee lists the faculty as an advisor
-    if not faculty in advisee.advisors:
+    if not faculty in advisee.advisors.all():
         return HttpResponse("You are not an advisor of this student.")
 
     if request.method == "POST":
@@ -104,7 +104,7 @@ def view_advisement(request, advisement):
     if not faculty.can_advise:
         return HttpResponse("You are not an advisor.")
     #check that this advisee lists the faculty as an advisor
-    if not faculty in advisee.advisors:
+    if not faculty in advisee.advisors.all():
         return HttpResponse("You are not an advisor of this student.")
 
     past_advisements = ChecksheetInstance.objects.filter(advisee=advisement.advisee).order_by('-created_at')
