@@ -75,11 +75,13 @@ p>a {
 .student, .advisee {
   font-size: 1.5em;
   margin: 0px 10px;
+  text-align: left;
 }
 
 .student *, .advisee * {
   margin: 5px;
   font-weight: normal;
+  text-align: left;
 }
 
 .hidden {
@@ -91,6 +93,7 @@ table{
   background-color: white;
   border-radius: 10px;
   padding: 10px;
+  text-align: left;
 }
 
 .plain {
