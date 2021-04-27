@@ -2,6 +2,7 @@ body {
     margin: 0;
     font-family: Helvetica, Arial, sans-serif;
     box-sizing: border-box;
+    background-color: #701931;
 }
 
 
@@ -18,10 +19,11 @@ body {
 
 /* make blocks for requirements or other sections */
 .requirement, .section, .ed-feat, .record{
-    border: 1px solid #D57800;
+    border: 1px solid #B6A268;
     max-width: 500px;
     margin: 7px;
     border-radius: 10px;
+    background-color: white;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
@@ -29,34 +31,38 @@ body {
 /* make block title bars */
 .requirement > h1, .section > h1, .ed-feat > h1, .record > h3{
     border-radius: 10px 10px 0 0;
-    background: #F1C382;
+    background: #D9C48A;
     margin: 0;
     padding: 5px;
     padding-bottom: 0;
     font-weight: 800;
 }
 .requirement > h2, .section > p {
-    background: #F1C382;
+    background: #D9C48A;
     margin: 0;
     padding: 5px;
     padding-top: 0;
     font-weight: 400;
     font-size: 18px;
+    background-color: white;
 }
 /* editor features get darker title */
 .ed-feat > h1, .first h3 {
-    background-color: #FF9E19;
+    background-color: #D9C48A;
 }
 
 /* give table rows width and set text align */
 .requirement > table {
     width: 100%;
+    background-color: white;
 }
 td:nth-child(1) {
     display: block;
+    background-color: white;
 }
 td:nth-child(2), td:nth-child(3) {
     text-align: center;
+    background-color: white;
 }
 
 
@@ -76,10 +82,10 @@ td:nth-child(2), td:nth-child(3) {
     cursor: pointer;
 }
 .toggle-ico:hover {
-    background-color: #FF9E19 !important;
+    background-color: #B6A268 !important;
 }
 .hidden {
-    border-bottom: 3px solid #D57800 !important;
+    border-bottom: 3px solid #B6A268 !important;
 }
 .hidden > .contents, .hidden > table, .hidden > div{
     display: none;
@@ -106,16 +112,16 @@ td:nth-child(2), td:nth-child(3) {
     padding: 10px;
     display: inline-block;
     border-radius: 10px;
-    background: #F1C382;
+    background: #D9C48A;
     color: inherit;
     text-decoration: inherit;
 }
 .button:hover {
-    background-color: #FF9E19;
+    background-color: #B6A268;
     cursor: pointer;
 }
 .button:active{
-    background-color: #D57800;
+    background-color: #701931;
     cursor: pointer;
 }
 
@@ -124,11 +130,13 @@ td:nth-child(2), td:nth-child(3) {
     display: flex;
     flex-flow: row;
     justify-content: space-around;
+    background-color: white;
 }
 
 #info p, .record p {
     padding: 5px;
     margin: 0 5px 0 5px;
+    background-color: white;
 }
 .empty {
     color: grey;
