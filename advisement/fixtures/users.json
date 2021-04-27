@@ -1,0 +1,33 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$216000$zrvTL3oHMP4W$1uo8+wS9190/riYjNmGGrW/3pbRQApNYSPhhkpP13m0=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "Department_Chair",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-04-27T19:08:43.907Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.faculty",
+    "pk": 3,
+    "fields": {
+      "user": 4,
+      "can_advise": false,
+      "can_upload_checksheets": false,
+      "can_add_students": false,
+      "can_assign_students": false,
+      "can_manage_students": false,
+      "can_manage_faculty": true
+    }
+  }
+]

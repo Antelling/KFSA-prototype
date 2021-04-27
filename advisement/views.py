@@ -18,7 +18,16 @@ def home(request):
     try:
         faculty = Faculty.objects.get(user=request.user)
     except ObjectDoesNotExist:
-        return HttpResponseRedirect(reverse("set_perm"))
+        #return HttpResponseRedirect(reverse("set_perm"))
+        fac = Faculty(user=request.user,
+                      can_advise=False,
+                      can_add_students=False,
+                      can_assign_students=False,
+                      can_manage_faculty=False,
+                      can_manage_students=False,
+                      can_upload_checksheets=False)
+        fac.save()
+        faculty = Faculty.objects.get(user=request.user)
 
     students = Advisee.objects.filter(advisors__in=[faculty])
     zipped = []
