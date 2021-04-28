@@ -13,7 +13,7 @@ td > input:nth-child(1) {
     border-radius: 5px;
     display: inline-flex;
     flex-direction: column;
-    text-align: center;
+    text-align: left;
     width: 49vw;
     height: 98vh;
     overflow: auto;

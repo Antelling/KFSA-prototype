@@ -1,0 +1,697 @@
+[
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2021-04-27T19:08:43.989Z",
+    "user": 3,
+    "content_type": 4,
+    "object_id": "4",
+    "object_repr": "Department_Chair",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2021-04-27T19:24:08.319Z",
+    "user": 3,
+    "content_type": 7,
+    "object_id": "3",
+    "object_repr": "Faculty< Department_Chair >",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 1,
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": 1,
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 2,
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": 1,
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 3,
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": 1,
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 4,
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": 1,
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 5,
+  "fields": {
+    "name": "Can add permission",
+    "content_type": 2,
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 6,
+  "fields": {
+    "name": "Can change permission",
+    "content_type": 2,
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 7,
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": 2,
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 8,
+  "fields": {
+    "name": "Can view permission",
+    "content_type": 2,
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 9,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 3,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 10,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 3,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 11,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 3,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 12,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 3,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 13,
+  "fields": {
+    "name": "Can add user",
+    "content_type": 4,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 14,
+  "fields": {
+    "name": "Can change user",
+    "content_type": 4,
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 15,
+  "fields": {
+    "name": "Can delete user",
+    "content_type": 4,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 16,
+  "fields": {
+    "name": "Can view user",
+    "content_type": 4,
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 17,
+  "fields": {
+    "name": "Can add content type",
+    "content_type": 5,
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 18,
+  "fields": {
+    "name": "Can change content type",
+    "content_type": 5,
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 19,
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": 5,
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 20,
+  "fields": {
+    "name": "Can view content type",
+    "content_type": 5,
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 21,
+  "fields": {
+    "name": "Can add session",
+    "content_type": 6,
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 22,
+  "fields": {
+    "name": "Can change session",
+    "content_type": 6,
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 23,
+  "fields": {
+    "name": "Can delete session",
+    "content_type": 6,
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 24,
+  "fields": {
+    "name": "Can view session",
+    "content_type": 6,
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 25,
+  "fields": {
+    "name": "Can add faculty",
+    "content_type": 7,
+    "codename": "add_faculty"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 26,
+  "fields": {
+    "name": "Can change faculty",
+    "content_type": 7,
+    "codename": "change_faculty"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 27,
+  "fields": {
+    "name": "Can delete faculty",
+    "content_type": 7,
+    "codename": "delete_faculty"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 28,
+  "fields": {
+    "name": "Can view faculty",
+    "content_type": 7,
+    "codename": "view_faculty"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 29,
+  "fields": {
+    "name": "Can add checksheet instance",
+    "content_type": 8,
+    "codename": "add_checksheetinstance"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 30,
+  "fields": {
+    "name": "Can change checksheet instance",
+    "content_type": 8,
+    "codename": "change_checksheetinstance"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 31,
+  "fields": {
+    "name": "Can delete checksheet instance",
+    "content_type": 8,
+    "codename": "delete_checksheetinstance"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 32,
+  "fields": {
+    "name": "Can view checksheet instance",
+    "content_type": 8,
+    "codename": "view_checksheetinstance"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 33,
+  "fields": {
+    "name": "Can add checksheet template",
+    "content_type": 9,
+    "codename": "add_checksheettemplate"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 34,
+  "fields": {
+    "name": "Can change checksheet template",
+    "content_type": 9,
+    "codename": "change_checksheettemplate"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 35,
+  "fields": {
+    "name": "Can delete checksheet template",
+    "content_type": 9,
+    "codename": "delete_checksheettemplate"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 36,
+  "fields": {
+    "name": "Can view checksheet template",
+    "content_type": 9,
+    "codename": "view_checksheettemplate"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 37,
+  "fields": {
+    "name": "Can add advisee",
+    "content_type": 10,
+    "codename": "add_advisee"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 38,
+  "fields": {
+    "name": "Can change advisee",
+    "content_type": 10,
+    "codename": "change_advisee"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 39,
+  "fields": {
+    "name": "Can delete advisee",
+    "content_type": 10,
+    "codename": "delete_advisee"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 40,
+  "fields": {
+    "name": "Can view advisee",
+    "content_type": 10,
+    "codename": "view_advisee"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$3z4kfuCLUBCX$4UrsRoAh8zW5SqB4+a7/YfmsQ9Ug9n1KlllXSpgG/tU=",
+    "last_login": "2021-04-27T18:36:58.804Z",
+    "is_superuser": false,
+    "username": "Aaron_Testing",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2021-04-27T02:26:51.742Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$UexGUj5OQFte$0tE1Lihv+jr+rhJ87Jt2jWqXA5wLaZ8VRq7W/Sp9ECM=",
+    "last_login": "2021-04-27T18:04:52.498Z",
+    "is_superuser": false,
+    "username": "worthless",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2021-04-27T18:04:37.746Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$Y4Mwu18N4NgB$9E0nhs8jUfVI683pUj8H8JVjt1u/DpoQw78t6M1wPbk=",
+    "last_login": "2021-04-27T18:49:52.389Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@admin.admin",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2021-04-27T18:49:33.684Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$zrvTL3oHMP4W$1uo8+wS9190/riYjNmGGrW/3pbRQApNYSPhhkpP13m0=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Department_Chair",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2021-04-27T19:08:43.907Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 1,
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 2,
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 3,
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 4,
+  "fields": {
+    "app_label": "auth",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 5,
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 6,
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 7,
+  "fields": {
+    "app_label": "accounts",
+    "model": "faculty"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 8,
+  "fields": {
+    "app_label": "advisement",
+    "model": "checksheetinstance"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 9,
+  "fields": {
+    "app_label": "advisement",
+    "model": "checksheettemplate"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 10,
+  "fields": {
+    "app_label": "advisement",
+    "model": "advisee"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "nvrlr9jcy5c1a13k9ef51ffnobif09xk",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2pABRia4dO8ZCDAgVQNJaVeNd9cmXej2v_f-JnxYl-rXkWc_sbgII06_WwzpmdsO-BHavcvU2zJPUe6KPOiQt875dT3cv4MaRv3WCAwOuKC1hkiVci6MERVrykWrCEAOEMhYx0oDBtKJTQBVLEcHWbw_xd43LQ:1lbSmO:2K8sZMSav1b6cBMZaJ7bNU8pyPAVxS2DskRPy0aIUh8",
+    "expire_date": "2021-05-11T18:49:52.524Z"
+  }
+},
+{
+  "model": "accounts.faculty",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "can_advise": true,
+    "can_upload_checksheets": true,
+    "can_add_students": true,
+    "can_assign_students": true,
+    "can_manage_students": true,
+    "can_manage_faculty": true
+  }
+},
+{
+  "model": "accounts.faculty",
+  "pk": 2,
+  "fields": {
+    "user": 2,
+    "can_advise": false,
+    "can_upload_checksheets": false,
+    "can_add_students": false,
+    "can_assign_students": false,
+    "can_manage_students": false,
+    "can_manage_faculty": false
+  }
+},
+{
+  "model": "accounts.faculty",
+  "pk": 3,
+  "fields": {
+    "user": 4,
+    "can_advise": false,
+    "can_upload_checksheets": false,
+    "can_add_students": false,
+    "can_assign_students": false,
+    "can_manage_students": false,
+    "can_manage_faculty": true
+  }
+},
+{
+  "model": "advisement.checksheettemplate",
+  "pk": 101,
+  "fields": {
+    "date": "2021-01-01T00:00:00Z",
+    "name": "M.S. Computer Science : Software Development (#2188)",
+    "description": "Active MS CSC checksheet, created 8/27/2018",
+    "data_file": "advisement/new_checksheet_templates/GLASCSC_2188.json"
+  }
+},
+{
+  "model": "advisement.checksheettemplate",
+  "pk": 102,
+  "fields": {
+    "date": "2021-01-01T00:00:00Z",
+    "name": "M.S. Computer Science : Software Development (#2158)",
+    "description": "MS CSC checksheet, created 8/24/2015",
+    "data_file": "advisement/new_checksheet_templates/GLASCSC_2158.json"
+  }
+},
+{
+  "model": "advisement.checksheettemplate",
+  "pk": 103,
+  "fields": {
+    "date": "2021-01-01T00:00:00Z",
+    "name": "M.S. Computer Science : Professional Science (#2188)",
+    "description": "MS CSC checksheet, created 8/27/2018",
+    "data_file": "advisement/new_checksheet_templates/GLASCSCPSM_2188.json"
+  }
+},
+{
+  "model": "advisement.checksheettemplate",
+  "pk": 104,
+  "fields": {
+    "date": "2021-01-01T00:00:00Z",
+    "name": "M.S. Computer Science : Information Technology (#2188)",
+    "description": "MS CSC checksheet, created 8/27/2018",
+    "data_file": "advisement/new_checksheet_templates/GLASCSCIT_2188.json"
+  }
+},
+{
+  "model": "advisement.checksheettemplate",
+  "pk": 105,
+  "fields": {
+    "date": "2021-01-01T00:00:00Z",
+    "name": "B.S. Computer Science (#2208)",
+    "description": "VS CSC checksheet, created 8/24/2020",
+    "data_file": "advisement/new_checksheet_templates/ULASCSCSD_2208.json"
+  }
+},
+{
+  "model": "advisement.checksheettemplate",
+  "pk": 106,
+  "fields": {
+    "date": "2021-01-01T00:00:00Z",
+    "name": "B.S. Information Technology (#2208)",
+    "description": "BS IT checksheet, created 8/24/2020",
+    "data_file": "advisement/new_checksheet_templates/ULASCSCIT_2208.json"
+  }
+},
+{
+  "model": "advisement.advisee",
+  "pk": 1,
+  "fields": {
+    "name": "Yogi Bear",
+    "id_number": "564654645",
+    "checksheet": 106,
+    "advisors": [
+      1
+    ]
+  }
+},
+{
+  "model": "advisement.advisee",
+  "pk": 2,
+  "fields": {
+    "name": "tic tac",
+    "id_number": "12333",
+    "checksheet": 105,
+    "advisors": [
+      1
+    ]
+  }
+},
+{
+  "model": "advisement.checksheetinstance",
+  "pk": 1,
+  "fields": {
+    "template": 106,
+    "advisee": 1,
+    "advisor": 1,
+    "data": "[{\"req\": \"Required Courses\", \"num\": \"\\n                    CSC 125\\n                \", \"name\": \"Discrete Math for CS II\", \"grade\": \"F\", \"grade_name\": \"CSC 125\", \"type\": \"reqlist\"}, {\"req\": \"Required Courses\", \"num\": \"\\n                    CSC 135\\n                \", \"name\": \"Comp Sci I\", \"grade\": \"F\", \"grade_name\": \"CSC 135\", \"type\": \"reqlist\"}, {\"req\": \"Required Courses\", \"num\": \"\\n                    CSC 150\\n                \", \"name\": \"Ethical, Legal, and Professional Impacts of the Digital Age\", \"grade\": \"F\", \"grade_name\": \"CSC 150\", \"type\": \"reqlist\"}, {\"req\": \"Required Courses\", \"num\": \"\\n\", \"inputCourseNum\": \"\", \"name\": \"CSC 136: Comp Sci II OR CSC 220: OO Multimedia Prog OR CSC 223: Advanced Scientific Prog\", \"grade\": \"A-\", \"grade_name\": \"\", \"type\": \"reqlist\"}, {\"req\": \"Required Courses\", \"num\": \"\\n                    CSC 242\\n                \", \"name\": \"Web Programming\", \"grade\": \"F\", \"grade_name\": \"CSC 242\", \"type\": \"reqlist\"}, {\"req\": \"Required Courses\", \"num\": \"\\n                    CSC 252\\n                \", \"name\": \"Unix Scripting and Administration\", \"grade\": \"F\", \"grade_name\": \"CSC 252\", \"type\": \"reqlist\"}, {\"req\": \"Required Courses\", \"num\": \"\\n                    CSC 253\\n                \", \"name\": \"IT Systems\", \"grade\": \"F\", \"grade_name\": \"CSC 253\", \"type\": \"reqlist\"}, {\"req\": \"Required Courses\", \"num\": \"\\n                    CSC 273\\n                \", \"name\": \"Computing Systems Integration\", \"grade\": \"F\", \"grade_name\": \"CSC 273\", \"type\": \"reqlist\"}, {\"req\": \"Required Courses\", \"num\": \"\\n                    CSC 311\\n                \", \"name\": \"Computer Networks\", \"grade\": \"B+\", \"grade_name\": \"CSC 311\", \"type\": \"reqlist\"}, {\"req\": \"Required Courses\", \"num\": \"\\n                    CSC 341\\n                \", \"name\": \"Information Security\", \"grade\": \"D\", \"grade_name\": \"CSC 341\", \"type\": \"reqlist\"}]",
+    "notes": "I hate your guts",
+    "created_at": "2021-04-27T02:38:25.918Z",
+    "updated_at": "2021-04-27T02:45:16.317Z"
+  }
+},
+{
+  "model": "advisement.checksheetinstance",
+  "pk": 2,
+  "fields": {
+    "template": 105,
+    "advisee": 2,
+    "advisor": 1,
+    "data": "",
+    "notes": null,
+    "created_at": "2021-04-27T02:45:36.049Z",
+    "updated_at": "2021-04-27T02:45:36.049Z"
+  }
+}
+]
