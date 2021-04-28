@@ -215,6 +215,8 @@ def edit_advisee(request, advisee):
             student.checksheet = ChecksheetTemplate.objects.get(pk=request.POST.get("checksheet"))
             student.save()
             return HttpResponseRedirect(reverse("advisee_list"))
+        else:
+            return HttpResponse("ERROR: The form submitted is invalid.")
     else:
         form = AddAdvisee(initial={'name':student.name,
                                    'id_number':student.id_number,
