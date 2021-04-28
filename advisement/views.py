@@ -2,6 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+from django.views.decorators.clickjacking import xframe_options_exempt
+
 from .models import ChecksheetInstance, Advisee, ChecksheetTemplate
 from accounts.models import Faculty
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
@@ -146,19 +148,28 @@ def add_checksheet(request):
     if request.method == "POST":
         form = AddChecksheet(request.POST)
         if form.is_valid():
+            data_file = form.cleaned_data["name"] + ".json"
+            data_file = os.path.join("advisement/new_checksheet_templates", data_file)
+            with open(data_file, "w") as file:
+                file.write(json.dumps(form.cleaned_data["data"]))
+
+
+            template = ChecksheetTemplate(name=form.cleaned_data["name"],
+                                          description=form.cleaned_data["description"],
+                                          data_file=data_file)
+
+            # make sure the name is unique
+            other_records = ChecksheetTemplate.objects.filter(name=form.cleaned_data["name"])
             try:
-                json.loads(form.cleaned_data["data"])
+                old_pk = other_records[0].pk
+                template.pk = old_pk
+            except IndexError:
+                pass
 
-                #make sure the name is unique
-                ChecksheetTemplate.objects.filter(name=form.cleaned_data["name"]).delete()
+            other_records.delete()
+            template.save()
 
-                #save the new template
-                form.save()
-
-                #return the rendered HTML for the preview
-                return HttpResponse("saved")
-            except Exception as e:
-                return HttpResponse(str(e))
+            return render(request, "checksheets/program.html", {"program": form.cleaned_data["data"]})
     else:
         form = AddChecksheet()
         return render(request, "advisement/upload_checksheet.html", {"checksheet": form})
@@ -289,6 +300,7 @@ def delete_checksheet(request):
 acessible via direct URL. Useful for checking that new program definitions have a correct and appealing rendered 
 appearance."""
 @login_required
+@xframe_options_exempt
 def view_template(request, template):
     template = ChecksheetTemplate.objects.get(pk=template)
     with open(template.data_file, "r") as data_file:

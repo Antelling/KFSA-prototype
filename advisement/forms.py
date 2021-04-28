@@ -12,10 +12,12 @@ def get_checksheet_options():
 class StudentChecksheetSelect(forms.Form):
     choice = forms.ChoiceField(widget=forms.RadioSelect, choices=get_checksheet_options())
 
-class AddChecksheet(forms.ModelForm):
-    class Meta:
-        model = models.ChecksheetTemplate
-        fields = "__all__"
+class AddChecksheet(forms.Form):
+    name = forms.CharField(label='Checksheet Name', max_length=200)
+    description = forms.CharField(widget=forms.Textarea)
+
+    data = forms.JSONField()
+
 
 class AddAdvisee(forms.ModelForm):
     class Meta:
