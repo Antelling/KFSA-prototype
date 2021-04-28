@@ -112,7 +112,7 @@ function fillInCourse(course) {
         }
     } else if (course.type === "creditdemand") {
         let row = requirement_listing.find("tr[name='" + course.row_num + "']")[0];
-        if (!row.length) {
+        if (!row) {
             overflowCourse(course);
             return;
         }
