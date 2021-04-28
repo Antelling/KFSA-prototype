@@ -92,8 +92,8 @@ function unwantedCourse(course) {
 }
 function fillInCourse(course) {
     "use strict";
-    let requirement_listing = $($("h1:contains('" + course.req + "')").parent()[0]);
-    if (!requirement_listing) {
+    let requirement_listing = $($("h1:contains('" + course.req + "')").closest(".requirement"))
+    if (!requirement_listing.length) {
         orphanCourse(course);
         return;
     }
@@ -162,13 +162,14 @@ function reqlist_total_credits(index, rl) {
     rl.find(".filled_in_reqs").text(n_filled_in_reqs)
 }
 
-$("select, .credit_input").change(function (){
-    let req = $(this).closest(".requirement")[0]
-    reqlist_total_credits(0, req)
-})
+function setup_requirement_updater() {
+    $("select, .credit_input").change(function (){
+        let req = $(this).closest(".requirement")[0]
+        reqlist_total_credits(0, req)
+    })
 
-function go() {
     $(".requirement").map(reqlist_total_credits)
 }
 
-go()
+$(setup_requirement_updater)
+
