@@ -61,7 +61,7 @@ form {
   border-radius: 3px;
   display: inline-block;
   text-decoration-line: none;
-  text-color: #6D1932;
+  color: #6D1932;
 }
 
 :not(h6)>a:hover, .button:hover {
