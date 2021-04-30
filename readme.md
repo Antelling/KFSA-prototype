@@ -1,10 +1,9 @@
-#todo: 
+# to deploy 
 
-add setting to requirement list: "clone": replaces grade input and course description with a checkbox,
-adds javascript to automatically manage the state of the checkbox, checkbox is checked if another 
-reqlist course with the same number has a grade above an F
-
-create student overview page
-create edit past advisement link
-create new advisement button 
-
+1. change the debug variable in KFSA/settings.py to False
+2. change the SECRET variable in setting.py 
+3. enter the pip environment with `pipenv shell`
+4. run `python manage.py migrate`
+5. run `python manage.py loaddata programs`
+6. run `python manage.py loaddata users`
+7. deploying django is done by starting the django server using gunicorn and then sitting it behind a webserver like Nginx. https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-18-04
