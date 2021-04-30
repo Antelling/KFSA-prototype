@@ -187,6 +187,7 @@ def add_students(request):
         form = AddAdvisee(request.POST)
         if form.is_valid():
             form.save()
+            form = AddAdvisee()
             return render(request, "advisement/add_advisee.html", {"form": form, "message": "Student Successfully Added!"})
         else:
             return render(request, "advisement/add_advisee.html", {"form": form, "message": "There were errors in the form. Please fix them and try again."})
@@ -220,22 +221,14 @@ def edit_advisee(request, advisee):
         return HttpResponse("You do not have permission to manage students.")
     student = Advisee.objects.get(pk=advisee)
     if request.method == "POST":
-        form = AddAdvisee(request.POST)
+        form = AddAdvisee(request.POST, instance=student)
         if form.is_valid():
-            student.name = request.POST.get("name")
-            student.id_number = request.POST.get("id_number")
-            student.advisors.set(request.POST.get("advisors"))
-            student.checksheet = ChecksheetTemplate.objects.get(pk=request.POST.get("checksheet"))
-            student.save()
+            form.save()
             return HttpResponseRedirect(reverse("advisee_list"))
         else:
-            return HttpResponse("ERROR: The form submitted is invalid.")
+            return render(request, "advisement/edit_advisee.html", {"form": form})
     else:
-        form = AddAdvisee(initial={'name':student.name,
-                                   'id_number':student.id_number,
-                                   'advisors':student.advisors.all,
-                                   'checksheet':student.checksheet
-                                   })
+        form = AddAdvisee(instance=student)
         return render(request, "advisement/edit_advisee.html", {"form": form})
 
 
