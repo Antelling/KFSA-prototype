@@ -187,10 +187,12 @@ def add_students(request):
         form = AddAdvisee(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse("add_students"))
+            return render(request, "advisement/add_advisee.html", {"form": form, "message": "Student Successfully Added!"})
+        else:
+            return render(request, "advisement/add_advisee.html", {"form": form, "message": "There were errors in the form. Please fix them and try again."})
     else:
         form = AddAdvisee()
-        return render(request, "advisement/add_advisee.html", {"form": form})
+        return render(request, "advisement/add_advisee.html", {"form": form, "message": ""})
 
 
 """List all of the students in the system.

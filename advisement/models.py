@@ -16,7 +16,7 @@ class ChecksheetTemplate(models.Model):
 
 class Advisee(models.Model):
     name = models.CharField(max_length=200)
-    id_number = models.CharField(max_length=10)
+    id_number = models.CharField(max_length=10, unique=True)
     advisors = models.ManyToManyField(Faculty)
     checksheet = models.ForeignKey(ChecksheetTemplate, on_delete=models.PROTECT)
     signer = Signer(sep='/', salt='advisement.Advisee')
