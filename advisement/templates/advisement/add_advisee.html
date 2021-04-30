@@ -10,7 +10,7 @@
 <form id ="f"  method="POST" >
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Submit">
+    <button class="button" type="submit">Submit</button>
 </form>
 <a href="{% url 'adv_home' %}">Home </a>
 {% endblock %}
