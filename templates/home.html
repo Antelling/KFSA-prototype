@@ -4,7 +4,7 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-<h3>You have successfully logged in!</h3>
+<h1>Account</h1>
     Hi {{ user.username }}!
     <p><i>Please select an option below to get started:</i></p>
     <p><a href="{% url 'adv_home' %}">Advisement System</a></p>

@@ -51,7 +51,7 @@ form {
 
 
 /* Buttons */
-:not(h6)>a {
+:not(h6)>a, .button {
   background-color: #F7CA32;
   padding: 0.5em;
   margin: 5px 0px;
@@ -61,9 +61,10 @@ form {
   border-radius: 3px;
   display: inline-block;
   text-decoration-line: none;
+  text-color: #6D1932;
 }
 
-:not(h6)>a:hover {
+:not(h6)>a:hover, .button:hover {
   background-color: #FFD63B;
 }
 

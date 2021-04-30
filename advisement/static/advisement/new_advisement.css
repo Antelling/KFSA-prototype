@@ -156,3 +156,16 @@ td:nth-child(2), td:nth-child(3) {
     border: 1px solid black;
     padding: 5px;
 }
+
+@media print{
+	#wrapper {
+		display: block;
+	}
+	.hidden > .contents, .hidden > table, .hidden > div{
+    		display: block;
+	}
+	body {
+		font-size: 12pt !important;
+	}
+		
+}

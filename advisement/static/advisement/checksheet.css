@@ -288,9 +288,8 @@ h1 {
 }
 
 @media print {
-    * {
-        color: red !important
-    }
+       	color: black !important
+	font-size: 12pt;
 
     .narrow {
         display: none
